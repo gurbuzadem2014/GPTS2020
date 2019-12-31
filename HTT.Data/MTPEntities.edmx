@@ -1,0 +1,292 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MTPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Sirketler">
+          <Key>
+            <PropertyRef Name="pkSirket" />
+          </Key>
+          <Property Name="pkSirket" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Sirket" Type="varchar" MaxLength="100" />
+          <Property Name="Aktifyil" Type="int" />
+          <Property Name="TelefonNo" Type="varchar" MaxLength="50" />
+          <Property Name="Adres" Type="varchar" MaxLength="500" />
+          <Property Name="VergiDairesi" Type="varchar" MaxLength="50" />
+          <Property Name="VergiNo" Type="varchar" MaxLength="50" />
+          <Property Name="ServerAdi" Type="varchar" MaxLength="50" />
+          <Property Name="Yetkili" Type="varchar" MaxLength="50" />
+          <Property Name="yedekalinacakyer" Type="varchar" MaxLength="500" />
+          <Property Name="Yetkilikodu" Type="varchar" MaxLength="50" />
+          <Property Name="BarkodNo" Type="int" />
+          <Property Name="WebKullanir" Type="bit" />
+          <Property Name="ParaPanelGoster" Type="bit" />
+          <Property Name="Sektor" Type="varchar" MaxLength="50" />
+          <Property Name="FaturaTipi" Type="smallint" />
+          <Property Name="StokTakibi" Type="bit" />
+          <Property Name="MusteriZorunluUyari" Type="bit" />
+          <Property Name="TedarikciZorunluUyari" Type="bit" />
+          <Property Name="TeraziBarkoduBasi" Type="int" />
+          <Property Name="MusteriBasNo" Type="int" />
+          <Property Name="BarkodOzelKod" Type="varchar" MaxLength="10" />
+          <Property Name="BonusYuzde" Type="int" />
+          <Property Name="WebSitesi" Type="varchar" MaxLength="500" />
+          <Property Name="Callerid" Type="bit" />
+          <Property Name="Birimi" Type="varchar" MaxLength="10" />
+          <Property Name="BonusTur" Type="int" />
+          <Property Name="Host" Type="varchar" MaxLength="50" />
+          <Property Name="GonderenEposta" Type="varchar" MaxLength="50" />
+          <Property Name="GonderenEpostaSifre" Type="varchar" MaxLength="50" />
+          <Property Name="Port" Type="varchar" MaxLength="10" />
+          <Property Name="YedekSaati" Type="varchar" MaxLength="8" />
+          <Property Name="Fax" Type="varchar" MaxLength="15" />
+          <Property Name="Cep" Type="varchar" MaxLength="15" />
+          <Property Name="eposta" Type="varchar" MaxLength="150" />
+          <Property Name="stok_birimi" Type="int" />
+          <Property Name="kdv_orani" Type="int" />
+          <Property Name="sms_kullaniciadi" Type="varchar" MaxLength="50" />
+          <Property Name="sms_sifre" Type="varchar" MaxLength="50" />
+          <Property Name="sms_baslik" Type="varchar" MaxLength="50" />
+          <Property Name="satisadedi_icindekiadetdir" Type="bit" />
+          <Property Name="OzelSifre" Type="varchar" MaxLength="15" />
+          <Property Name="FaturaTipiAlis" Type="smallint" />
+          <Property Name="TeraziBarkoduBasi2" Type="int" />
+          <Property Name="TeraziBarkoduBasi3" Type="int" />
+          <Property Name="ikincifiyatgoster" Type="bit" />
+          <Property Name="KullaniciNo" Type="varchar" MaxLength="20" />
+          <Property Name="odemesekli" Type="varchar" MaxLength="15" />
+          <Property Name="satiskopyala" Type="bit" />
+          <Property Name="uruneklendisescal" Type="bit" />
+          <Property Name="EnableSsl" Type="bit" />
+          <Property Name="OncekiFiyatHatirla" Type="bit" />
+          <Property Name="yedek_alinacak_yer_paylasimli" Type="varchar" MaxLength="100" />
+          <Property Name="bccEposta" Type="varchar" MaxLength="100" />
+          <Property Name="ccEposta" Type="varchar" MaxLength="100" />
+          <Property Name="BitisTarihi" Type="datetime" />
+          <Property Name="uretici__barkod_no" Type="nvarchar" MaxLength="10" />
+          <Property Name="tedarikciler_giderdir" Type="bit" />
+          <Property Name="is_kamp_odeme_sekli_acikhesap" Type="int" />
+          <Property Name="fkKodu" Type="int" />
+          <Property Name="fkAltGrup" Type="int" />
+          <Property Name="fkKoduDefault" Type="int" />
+          <Property Name="fkAltGrupDefault" Type="int" />
+          <Property Name="DepoKullaniyorum" Type="bit" />
+          <Property Name="stok_karti_dizayn" Type="bit" />
+          <Property Name="yedek_sil_gun" Type="int" />
+          <Property Name="fkBirimler" Type="int" />
+          <Property Name="islem_tarihi" Type="datetime" />
+          <Property Name="ilktarih_devir_sontarih" Type="int" />
+          <Property Name="e_fatura_kul" Type="nvarchar" MaxLength="50" />
+          <Property Name="e_fatura_sifre" Type="nvarchar" MaxLength="50" />
+          <Property Name="kdv_orani_alis" Type="int" />
+          <Property Name="oto_guncelle" Type="bit" />
+          <Property Name="versiyon" Type="int" />
+          <Property Name="ucuncufiyatgoster" Type="bit" />
+          <Property Name="makbuz_yazdir" Type="bit" />
+        </EntityType>
+        <EntityContainer Name="MTPModelStoreContainer">
+          <EntitySet Name="Sirketler" EntityType="Self.Sirketler" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MTPModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Sirketler">
+          <Key>
+            <PropertyRef Name="pkSirket" />
+          </Key>
+          <Property Name="pkSirket" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Sirket" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Aktifyil" Type="Int32" />
+          <Property Name="TelefonNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Adres" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="VergiDairesi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="VergiNo" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ServerAdi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Yetkili" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="yedekalinacakyer" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Yetkilikodu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="BarkodNo" Type="Int32" />
+          <Property Name="WebKullanir" Type="Boolean" />
+          <Property Name="ParaPanelGoster" Type="Boolean" />
+          <Property Name="Sektor" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FaturaTipi" Type="Int16" />
+          <Property Name="StokTakibi" Type="Boolean" />
+          <Property Name="MusteriZorunluUyari" Type="Boolean" />
+          <Property Name="TedarikciZorunluUyari" Type="Boolean" />
+          <Property Name="TeraziBarkoduBasi" Type="Int32" />
+          <Property Name="MusteriBasNo" Type="Int32" />
+          <Property Name="BarkodOzelKod" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="BonusYuzde" Type="Int32" />
+          <Property Name="WebSitesi" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Callerid" Type="Boolean" />
+          <Property Name="Birimi" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="BonusTur" Type="Int32" />
+          <Property Name="Host" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GonderenEposta" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="GonderenEpostaSifre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Port" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="YedekSaati" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="Fax" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Cep" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="eposta" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="stok_birimi" Type="Int32" />
+          <Property Name="kdv_orani" Type="Int32" />
+          <Property Name="sms_kullaniciadi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="sms_sifre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="sms_baslik" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="satisadedi_icindekiadetdir" Type="Boolean" />
+          <Property Name="OzelSifre" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="FaturaTipiAlis" Type="Int16" />
+          <Property Name="TeraziBarkoduBasi2" Type="Int32" />
+          <Property Name="TeraziBarkoduBasi3" Type="Int32" />
+          <Property Name="ikincifiyatgoster" Type="Boolean" />
+          <Property Name="KullaniciNo" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="odemesekli" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="satiskopyala" Type="Boolean" />
+          <Property Name="uruneklendisescal" Type="Boolean" />
+          <Property Name="EnableSsl" Type="Boolean" />
+          <Property Name="OncekiFiyatHatirla" Type="Boolean" />
+          <Property Name="yedek_alinacak_yer_paylasimli" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="bccEposta" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="ccEposta" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="BitisTarihi" Type="DateTime" Precision="3" />
+          <Property Name="uretici__barkod_no" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="tedarikciler_giderdir" Type="Boolean" />
+          <Property Name="is_kamp_odeme_sekli_acikhesap" Type="Int32" />
+          <Property Name="fkKodu" Type="Int32" />
+          <Property Name="fkAltGrup" Type="Int32" />
+          <Property Name="fkKoduDefault" Type="Int32" />
+          <Property Name="fkAltGrupDefault" Type="Int32" />
+          <Property Name="DepoKullaniyorum" Type="Boolean" />
+          <Property Name="stok_karti_dizayn" Type="Boolean" />
+          <Property Name="yedek_sil_gun" Type="Int32" />
+          <Property Name="fkBirimler" Type="Int32" />
+          <Property Name="islem_tarihi" Type="DateTime" Precision="3" />
+          <Property Name="ilktarih_devir_sontarih" Type="Int32" />
+          <Property Name="e_fatura_kul" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="e_fatura_sifre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="kdv_orani_alis" Type="Int32" />
+          <Property Name="oto_guncelle" Type="Boolean" />
+          <Property Name="versiyon" Type="Int32" />
+          <Property Name="ucuncufiyatgoster" Type="Boolean" />
+          <Property Name="makbuz_yazdir" Type="Boolean" />
+        </EntityType>
+        <EntityContainer Name="MTPEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Sirketler" EntityType="Self.Sirketler" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MTPModelStoreContainer" CdmEntityContainer="MTPEntities">
+          <EntitySetMapping Name="Sirketler">
+            <EntityTypeMapping TypeName="MTPModel.Sirketler">
+              <MappingFragment StoreEntitySet="Sirketler">
+                <ScalarProperty Name="pkSirket" ColumnName="pkSirket" />
+                <ScalarProperty Name="Sirket" ColumnName="Sirket" />
+                <ScalarProperty Name="Aktifyil" ColumnName="Aktifyil" />
+                <ScalarProperty Name="TelefonNo" ColumnName="TelefonNo" />
+                <ScalarProperty Name="Adres" ColumnName="Adres" />
+                <ScalarProperty Name="VergiDairesi" ColumnName="VergiDairesi" />
+                <ScalarProperty Name="VergiNo" ColumnName="VergiNo" />
+                <ScalarProperty Name="ServerAdi" ColumnName="ServerAdi" />
+                <ScalarProperty Name="Yetkili" ColumnName="Yetkili" />
+                <ScalarProperty Name="yedekalinacakyer" ColumnName="yedekalinacakyer" />
+                <ScalarProperty Name="Yetkilikodu" ColumnName="Yetkilikodu" />
+                <ScalarProperty Name="BarkodNo" ColumnName="BarkodNo" />
+                <ScalarProperty Name="WebKullanir" ColumnName="WebKullanir" />
+                <ScalarProperty Name="ParaPanelGoster" ColumnName="ParaPanelGoster" />
+                <ScalarProperty Name="Sektor" ColumnName="Sektor" />
+                <ScalarProperty Name="FaturaTipi" ColumnName="FaturaTipi" />
+                <ScalarProperty Name="StokTakibi" ColumnName="StokTakibi" />
+                <ScalarProperty Name="MusteriZorunluUyari" ColumnName="MusteriZorunluUyari" />
+                <ScalarProperty Name="TedarikciZorunluUyari" ColumnName="TedarikciZorunluUyari" />
+                <ScalarProperty Name="TeraziBarkoduBasi" ColumnName="TeraziBarkoduBasi" />
+                <ScalarProperty Name="MusteriBasNo" ColumnName="MusteriBasNo" />
+                <ScalarProperty Name="BarkodOzelKod" ColumnName="BarkodOzelKod" />
+                <ScalarProperty Name="BonusYuzde" ColumnName="BonusYuzde" />
+                <ScalarProperty Name="WebSitesi" ColumnName="WebSitesi" />
+                <ScalarProperty Name="Callerid" ColumnName="Callerid" />
+                <ScalarProperty Name="Birimi" ColumnName="Birimi" />
+                <ScalarProperty Name="BonusTur" ColumnName="BonusTur" />
+                <ScalarProperty Name="Host" ColumnName="Host" />
+                <ScalarProperty Name="GonderenEposta" ColumnName="GonderenEposta" />
+                <ScalarProperty Name="GonderenEpostaSifre" ColumnName="GonderenEpostaSifre" />
+                <ScalarProperty Name="Port" ColumnName="Port" />
+                <ScalarProperty Name="YedekSaati" ColumnName="YedekSaati" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="Cep" ColumnName="Cep" />
+                <ScalarProperty Name="eposta" ColumnName="eposta" />
+                <ScalarProperty Name="stok_birimi" ColumnName="stok_birimi" />
+                <ScalarProperty Name="kdv_orani" ColumnName="kdv_orani" />
+                <ScalarProperty Name="sms_kullaniciadi" ColumnName="sms_kullaniciadi" />
+                <ScalarProperty Name="sms_sifre" ColumnName="sms_sifre" />
+                <ScalarProperty Name="sms_baslik" ColumnName="sms_baslik" />
+                <ScalarProperty Name="satisadedi_icindekiadetdir" ColumnName="satisadedi_icindekiadetdir" />
+                <ScalarProperty Name="OzelSifre" ColumnName="OzelSifre" />
+                <ScalarProperty Name="FaturaTipiAlis" ColumnName="FaturaTipiAlis" />
+                <ScalarProperty Name="TeraziBarkoduBasi2" ColumnName="TeraziBarkoduBasi2" />
+                <ScalarProperty Name="TeraziBarkoduBasi3" ColumnName="TeraziBarkoduBasi3" />
+                <ScalarProperty Name="ikincifiyatgoster" ColumnName="ikincifiyatgoster" />
+                <ScalarProperty Name="KullaniciNo" ColumnName="KullaniciNo" />
+                <ScalarProperty Name="odemesekli" ColumnName="odemesekli" />
+                <ScalarProperty Name="satiskopyala" ColumnName="satiskopyala" />
+                <ScalarProperty Name="uruneklendisescal" ColumnName="uruneklendisescal" />
+                <ScalarProperty Name="EnableSsl" ColumnName="EnableSsl" />
+                <ScalarProperty Name="OncekiFiyatHatirla" ColumnName="OncekiFiyatHatirla" />
+                <ScalarProperty Name="yedek_alinacak_yer_paylasimli" ColumnName="yedek_alinacak_yer_paylasimli" />
+                <ScalarProperty Name="bccEposta" ColumnName="bccEposta" />
+                <ScalarProperty Name="ccEposta" ColumnName="ccEposta" />
+                <ScalarProperty Name="BitisTarihi" ColumnName="BitisTarihi" />
+                <ScalarProperty Name="uretici__barkod_no" ColumnName="uretici__barkod_no" />
+                <ScalarProperty Name="tedarikciler_giderdir" ColumnName="tedarikciler_giderdir" />
+                <ScalarProperty Name="is_kamp_odeme_sekli_acikhesap" ColumnName="is_kamp_odeme_sekli_acikhesap" />
+                <ScalarProperty Name="fkKodu" ColumnName="fkKodu" />
+                <ScalarProperty Name="fkAltGrup" ColumnName="fkAltGrup" />
+                <ScalarProperty Name="fkKoduDefault" ColumnName="fkKoduDefault" />
+                <ScalarProperty Name="fkAltGrupDefault" ColumnName="fkAltGrupDefault" />
+                <ScalarProperty Name="DepoKullaniyorum" ColumnName="DepoKullaniyorum" />
+                <ScalarProperty Name="stok_karti_dizayn" ColumnName="stok_karti_dizayn" />
+                <ScalarProperty Name="yedek_sil_gun" ColumnName="yedek_sil_gun" />
+                <ScalarProperty Name="fkBirimler" ColumnName="fkBirimler" />
+                <ScalarProperty Name="islem_tarihi" ColumnName="islem_tarihi" />
+                <ScalarProperty Name="ilktarih_devir_sontarih" ColumnName="ilktarih_devir_sontarih" />
+                <ScalarProperty Name="e_fatura_kul" ColumnName="e_fatura_kul" />
+                <ScalarProperty Name="e_fatura_sifre" ColumnName="e_fatura_sifre" />
+                <ScalarProperty Name="kdv_orani_alis" ColumnName="kdv_orani_alis" />
+                <ScalarProperty Name="oto_guncelle" ColumnName="oto_guncelle" />
+                <ScalarProperty Name="versiyon" ColumnName="versiyon" />
+                <ScalarProperty Name="ucuncufiyatgoster" ColumnName="ucuncufiyatgoster" />
+                <ScalarProperty Name="makbuz_yazdir" ColumnName="makbuz_yazdir" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

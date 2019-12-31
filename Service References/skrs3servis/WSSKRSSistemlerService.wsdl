@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://ws.esaglik.surat.com.tr/" name="WSSKRSSistemlerService" targetNamespace="http://ws.esaglik.surat.com.tr/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="https://yws.sagliknet.saglik.gov.tr/ESaglikYardimciServislerApp-WSHariciWebServisleri/WSSKRSSistemlerPort?xsd" namespace="http://ws.esaglik.surat.com.tr/" />
+    </xsd:schema>
+  </types>
+  <message name="Sistemler">
+    <part name="parameters" element="tns:Sistemler" />
+  </message>
+  <message name="SistemlerResponse">
+    <part name="parameters" element="tns:SistemlerResponse" />
+  </message>
+  <message name="SistemKodlari">
+    <part name="parameters" element="tns:SistemKodlari" />
+  </message>
+  <message name="SistemKodlariResponse">
+    <part name="parameters" element="tns:SistemKodlariResponse" />
+  </message>
+  <message name="SistemKodlariSayfaGetir">
+    <part name="parameters" element="tns:SistemKodlariSayfaGetir" />
+  </message>
+  <message name="SistemKodlariSayfaGetirResponse">
+    <part name="parameters" element="tns:SistemKodlariSayfaGetirResponse" />
+  </message>
+  <portType name="WSSKRSSistemler">
+    <operation name="Sistemler">
+      <input message="tns:Sistemler" />
+      <output message="tns:SistemlerResponse" />
+    </operation>
+    <operation name="SistemKodlari">
+      <input message="tns:SistemKodlari" />
+      <output message="tns:SistemKodlariResponse" />
+    </operation>
+    <operation name="SistemKodlariSayfaGetir">
+      <input message="tns:SistemKodlariSayfaGetir" />
+      <output message="tns:SistemKodlariSayfaGetirResponse" />
+    </operation>
+  </portType>
+  <binding name="WSSKRSSistemlerPortBinding" type="tns:WSSKRSSistemler">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="Sistemler">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="SistemKodlari">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="SistemKodlariSayfaGetir">
+      <soap:operation soapAction="" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="WSSKRSSistemlerService">
+    <port name="WSSKRSSistemlerPort" binding="tns:WSSKRSSistemlerPortBinding">
+      <soap:address location="https://yws.sagliknet.saglik.gov.tr/ESaglikYardimciServislerApp-WSHariciWebServisleri/WSSKRSSistemlerPort" />
+    </port>
+  </service>
+</definitions>

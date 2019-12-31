@@ -1,0 +1,88 @@
+﻿<XtraSerializer version="1.0" application="DevExpress.XtraBars.Ribbon.RibbonCustomizationModel">
+  <property name="Categories" iskey="true" value="1">
+    <property name="Item1" isnull="true" iskey="true">
+      <property name="Text">(Unassigned Pages)</property>
+      <property name="IsVisible">true</property>
+      <property name="Pages" iskey="true" value="1">
+        <property name="Item1" isnull="true" iskey="true">
+          <property name="Text">ribbonPage1</property>
+          <property name="IsVisible">true</property>
+          <property name="Groups" iskey="true" value="1">
+            <property name="Item1" isnull="true" iskey="true">
+              <property name="Text">ribbonPageGroup1</property>
+              <property name="ShowCaptionButton">true</property>
+              <property name="IsVisible">true</property>
+              <property name="Items" iskey="true" value="2">
+                <property name="Item1" isnull="true" iskey="true">
+                  <property name="Text">Sales</property>
+                  <property name="IsVisible">true</property>
+                  <property name="ItemSourceIdInfo" isnull="true" iskey="true">
+                    <property name="Id">2147483647</property>
+                  </property>
+                  <property name="IsCustom">false</property>
+                  <property name="Alias">Sales</property>
+                  <property name="Name" />
+                  <property name="IdInfo" isnull="true" iskey="true">
+                    <property name="Id">8</property>
+                  </property>
+                  <property name="SourceIdInfo" isnull="true" iskey="true">
+                    <property name="Id">3</property>
+                  </property>
+                </property>
+                <property name="Item2" isnull="true" iskey="true">
+                  <property name="Text">Totals</property>
+                  <property name="IsVisible">true</property>
+                  <property name="ItemSourceIdInfo" isnull="true" iskey="true">
+                    <property name="Id">2147483647</property>
+                  </property>
+                  <property name="IsCustom">false</property>
+                  <property name="Alias">Totals</property>
+                  <property name="Name" />
+                  <property name="IdInfo" isnull="true" iskey="true">
+                    <property name="Id">9</property>
+                  </property>
+                  <property name="SourceIdInfo" isnull="true" iskey="true">
+                    <property name="Id">4</property>
+                  </property>
+                </property>
+              </property>
+              <property name="IsCustom">false</property>
+              <property name="Alias">ribbonPageGroup1</property>
+              <property name="Name">ribbonPageGroup1</property>
+              <property name="IdInfo" isnull="true" iskey="true">
+                <property name="Id">7</property>
+              </property>
+              <property name="SourceIdInfo" isnull="true" iskey="true">
+                <property name="Id">2</property>
+              </property>
+            </property>
+          </property>
+          <property name="IsCustom">false</property>
+          <property name="Alias">ribbonPage1</property>
+          <property name="Name">ribbonPage1</property>
+          <property name="IdInfo" isnull="true" iskey="true">
+            <property name="Id">6</property>
+          </property>
+          <property name="SourceIdInfo" isnull="true" iskey="true">
+            <property name="Id">1</property>
+          </property>
+        </property>
+      </property>
+      <property name="IsCustom">false</property>
+      <property name="Alias">(Unassigned Pages)</property>
+      <property name="Name" />
+      <property name="IdInfo" isnull="true" iskey="true">
+        <property name="Id">5</property>
+      </property>
+      <property name="SourceIdInfo" isnull="true" iskey="true">
+        <property name="Id">0</property>
+      </property>
+    </property>
+  </property>
+  <property name="CommonSettings" isnull="true" iskey="true">
+    <property name="Minimized">false</property>
+    <property name="ToolbarLocation">Default</property>
+    <property name="IsReady">true</property>
+    <property name="HashCode">5</property>
+  </property>
+</XtraSerializer>

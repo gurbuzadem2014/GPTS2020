@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SKRS3SistemKodlari", "DotNetTestApp\SKRS3SistemKodlari.csproj", "{E24B4D85-C999-46E3-BE25-A415F33A6F26}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://10.201.132.223:8080/tfs/arkcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = DotNetTestApp\\SKRS3SistemKodlari.csproj
+		SccProjectName1 = DotNetTestApp
+		SccLocalPath1 = DotNetTestApp
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E24B4D85-C999-46E3-BE25-A415F33A6F26}.Debug|x86.ActiveCfg = Debug|x86
+		{E24B4D85-C999-46E3-BE25-A415F33A6F26}.Debug|x86.Build.0 = Debug|x86
+		{E24B4D85-C999-46E3-BE25-A415F33A6F26}.Release|x86.ActiveCfg = Release|x86
+		{E24B4D85-C999-46E3-BE25-A415F33A6F26}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

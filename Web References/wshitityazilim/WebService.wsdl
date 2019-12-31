@@ -1,0 +1,1244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="GetItems">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetItemsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetItemsResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="kullanicilar">
+        <s:complexType />
+      </s:element>
+      <s:element name="kullanicilarResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="kullanicilarResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="KasaHareketleri">
+        <s:complexType />
+      </s:element>
+      <s:element name="KasaHareketleriResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="KasaHareketleriResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="destek">
+        <s:complexType />
+      </s:element>
+      <s:element name="destekResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="destekResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="KullanicilarRef">
+        <s:complexType />
+      </s:element>
+      <s:element name="KullanicilarRefResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="KullanicilarRefResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetItemsGecenler">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetItemsGecenlerResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetItemsGecenlerResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="HelloWorld">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="eposta" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="KulEkle">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="kul_id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="kuladi" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="aciklama" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="eposta" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="KulEkleResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="KulEkleResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DestekEkle">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="kul_id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="eposta" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="konu" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="mesaj" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DestekEkleResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DestekEkleResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DestekGuncelle">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="destek_id" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="durumu" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DestekGuncelleResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DestekGuncelleResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DestekList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="kul_id" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DestekListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DestekListResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DestekDetayEkle">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="destekid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="detaymesaj" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DestekDetayEkleResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DestekDetayEkleResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DestekDetayList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="id" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DestekDetayListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DestekDetayListResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="KulList">
+        <s:complexType />
+      </s:element>
+      <s:element name="KulListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="KulListResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EpostadanKulId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="eposta" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="EpostadanKulIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="EpostadanKulIdResult">
+              <s:complexType>
+                <s:sequence>
+                  <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+                  <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+      <s:element name="DataTable" nillable="true">
+        <s:complexType>
+          <s:sequence>
+            <s:any minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/2001/XMLSchema" processContents="lax" />
+            <s:any minOccurs="1" namespace="urn:schemas-microsoft-com:xml-diffgram-v1" processContents="lax" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetItemsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetItems" />
+  </wsdl:message>
+  <wsdl:message name="GetItemsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetItemsResponse" />
+  </wsdl:message>
+  <wsdl:message name="kullanicilarSoapIn">
+    <wsdl:part name="parameters" element="tns:kullanicilar" />
+  </wsdl:message>
+  <wsdl:message name="kullanicilarSoapOut">
+    <wsdl:part name="parameters" element="tns:kullanicilarResponse" />
+  </wsdl:message>
+  <wsdl:message name="KasaHareketleriSoapIn">
+    <wsdl:part name="parameters" element="tns:KasaHareketleri" />
+  </wsdl:message>
+  <wsdl:message name="KasaHareketleriSoapOut">
+    <wsdl:part name="parameters" element="tns:KasaHareketleriResponse" />
+  </wsdl:message>
+  <wsdl:message name="destekSoapIn">
+    <wsdl:part name="parameters" element="tns:destek" />
+  </wsdl:message>
+  <wsdl:message name="destekSoapOut">
+    <wsdl:part name="parameters" element="tns:destekResponse" />
+  </wsdl:message>
+  <wsdl:message name="KullanicilarRefSoapIn">
+    <wsdl:part name="parameters" element="tns:KullanicilarRef" />
+  </wsdl:message>
+  <wsdl:message name="KullanicilarRefSoapOut">
+    <wsdl:part name="parameters" element="tns:KullanicilarRefResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetItemsGecenlerSoapIn">
+    <wsdl:part name="parameters" element="tns:GetItemsGecenler" />
+  </wsdl:message>
+  <wsdl:message name="GetItemsGecenlerSoapOut">
+    <wsdl:part name="parameters" element="tns:GetItemsGecenlerResponse" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="KulEkleSoapIn">
+    <wsdl:part name="parameters" element="tns:KulEkle" />
+  </wsdl:message>
+  <wsdl:message name="KulEkleSoapOut">
+    <wsdl:part name="parameters" element="tns:KulEkleResponse" />
+  </wsdl:message>
+  <wsdl:message name="DestekEkleSoapIn">
+    <wsdl:part name="parameters" element="tns:DestekEkle" />
+  </wsdl:message>
+  <wsdl:message name="DestekEkleSoapOut">
+    <wsdl:part name="parameters" element="tns:DestekEkleResponse" />
+  </wsdl:message>
+  <wsdl:message name="DestekGuncelleSoapIn">
+    <wsdl:part name="parameters" element="tns:DestekGuncelle" />
+  </wsdl:message>
+  <wsdl:message name="DestekGuncelleSoapOut">
+    <wsdl:part name="parameters" element="tns:DestekGuncelleResponse" />
+  </wsdl:message>
+  <wsdl:message name="DestekListSoapIn">
+    <wsdl:part name="parameters" element="tns:DestekList" />
+  </wsdl:message>
+  <wsdl:message name="DestekListSoapOut">
+    <wsdl:part name="parameters" element="tns:DestekListResponse" />
+  </wsdl:message>
+  <wsdl:message name="DestekDetayEkleSoapIn">
+    <wsdl:part name="parameters" element="tns:DestekDetayEkle" />
+  </wsdl:message>
+  <wsdl:message name="DestekDetayEkleSoapOut">
+    <wsdl:part name="parameters" element="tns:DestekDetayEkleResponse" />
+  </wsdl:message>
+  <wsdl:message name="DestekDetayListSoapIn">
+    <wsdl:part name="parameters" element="tns:DestekDetayList" />
+  </wsdl:message>
+  <wsdl:message name="DestekDetayListSoapOut">
+    <wsdl:part name="parameters" element="tns:DestekDetayListResponse" />
+  </wsdl:message>
+  <wsdl:message name="KulListSoapIn">
+    <wsdl:part name="parameters" element="tns:KulList" />
+  </wsdl:message>
+  <wsdl:message name="KulListSoapOut">
+    <wsdl:part name="parameters" element="tns:KulListResponse" />
+  </wsdl:message>
+  <wsdl:message name="EpostadanKulIdSoapIn">
+    <wsdl:part name="parameters" element="tns:EpostadanKulId" />
+  </wsdl:message>
+  <wsdl:message name="EpostadanKulIdSoapOut">
+    <wsdl:part name="parameters" element="tns:EpostadanKulIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetItemsHttpGetIn" />
+  <wsdl:message name="GetItemsHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="kullanicilarHttpGetIn" />
+  <wsdl:message name="kullanicilarHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="KasaHareketleriHttpGetIn" />
+  <wsdl:message name="KasaHareketleriHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="destekHttpGetIn" />
+  <wsdl:message name="destekHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="KullanicilarRefHttpGetIn" />
+  <wsdl:message name="KullanicilarRefHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetItemsGecenlerHttpGetIn" />
+  <wsdl:message name="GetItemsGecenlerHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpGetIn">
+    <wsdl:part name="eposta" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="KulEkleHttpGetIn">
+    <wsdl:part name="kul_id" type="s:string" />
+    <wsdl:part name="kuladi" type="s:string" />
+    <wsdl:part name="aciklama" type="s:string" />
+    <wsdl:part name="eposta" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="KulEkleHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="DestekEkleHttpGetIn">
+    <wsdl:part name="kul_id" type="s:string" />
+    <wsdl:part name="eposta" type="s:string" />
+    <wsdl:part name="konu" type="s:string" />
+    <wsdl:part name="mesaj" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DestekEkleHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="DestekGuncelleHttpGetIn">
+    <wsdl:part name="destek_id" type="s:string" />
+    <wsdl:part name="durumu" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DestekGuncelleHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="DestekListHttpGetIn">
+    <wsdl:part name="kul_id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DestekListHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="DestekDetayEkleHttpGetIn">
+    <wsdl:part name="destekid" type="s:string" />
+    <wsdl:part name="detaymesaj" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DestekDetayEkleHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="DestekDetayListHttpGetIn">
+    <wsdl:part name="id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DestekDetayListHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="KulListHttpGetIn" />
+  <wsdl:message name="KulListHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="EpostadanKulIdHttpGetIn">
+    <wsdl:part name="eposta" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EpostadanKulIdHttpGetOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="GetItemsHttpPostIn" />
+  <wsdl:message name="GetItemsHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="kullanicilarHttpPostIn" />
+  <wsdl:message name="kullanicilarHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="KasaHareketleriHttpPostIn" />
+  <wsdl:message name="KasaHareketleriHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="destekHttpPostIn" />
+  <wsdl:message name="destekHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="KullanicilarRefHttpPostIn" />
+  <wsdl:message name="KullanicilarRefHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetItemsGecenlerHttpPostIn" />
+  <wsdl:message name="GetItemsGecenlerHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpPostIn">
+    <wsdl:part name="eposta" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="KulEkleHttpPostIn">
+    <wsdl:part name="kul_id" type="s:string" />
+    <wsdl:part name="kuladi" type="s:string" />
+    <wsdl:part name="aciklama" type="s:string" />
+    <wsdl:part name="eposta" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="KulEkleHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="DestekEkleHttpPostIn">
+    <wsdl:part name="kul_id" type="s:string" />
+    <wsdl:part name="eposta" type="s:string" />
+    <wsdl:part name="konu" type="s:string" />
+    <wsdl:part name="mesaj" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DestekEkleHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="DestekGuncelleHttpPostIn">
+    <wsdl:part name="destek_id" type="s:string" />
+    <wsdl:part name="durumu" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DestekGuncelleHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="DestekListHttpPostIn">
+    <wsdl:part name="kul_id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DestekListHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="DestekDetayEkleHttpPostIn">
+    <wsdl:part name="destekid" type="s:string" />
+    <wsdl:part name="detaymesaj" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DestekDetayEkleHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="DestekDetayListHttpPostIn">
+    <wsdl:part name="id" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="DestekDetayListHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="KulListHttpPostIn" />
+  <wsdl:message name="KulListHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:message name="EpostadanKulIdHttpPostIn">
+    <wsdl:part name="eposta" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="EpostadanKulIdHttpPostOut">
+    <wsdl:part name="Body" element="tns:DataTable" />
+  </wsdl:message>
+  <wsdl:portType name="WebServiceSoap">
+    <wsdl:operation name="GetItems">
+      <wsdl:input message="tns:GetItemsSoapIn" />
+      <wsdl:output message="tns:GetItemsSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="kullanicilar">
+      <wsdl:input message="tns:kullanicilarSoapIn" />
+      <wsdl:output message="tns:kullanicilarSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="KasaHareketleri">
+      <wsdl:input message="tns:KasaHareketleriSoapIn" />
+      <wsdl:output message="tns:KasaHareketleriSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="destek">
+      <wsdl:input message="tns:destekSoapIn" />
+      <wsdl:output message="tns:destekSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="KullanicilarRef">
+      <wsdl:input message="tns:KullanicilarRefSoapIn" />
+      <wsdl:output message="tns:KullanicilarRefSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetItemsGecenler">
+      <wsdl:input message="tns:GetItemsGecenlerSoapIn" />
+      <wsdl:output message="tns:GetItemsGecenlerSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="KulEkle">
+      <wsdl:input message="tns:KulEkleSoapIn" />
+      <wsdl:output message="tns:KulEkleSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DestekEkle">
+      <wsdl:input message="tns:DestekEkleSoapIn" />
+      <wsdl:output message="tns:DestekEkleSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DestekGuncelle">
+      <wsdl:input message="tns:DestekGuncelleSoapIn" />
+      <wsdl:output message="tns:DestekGuncelleSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DestekList">
+      <wsdl:input message="tns:DestekListSoapIn" />
+      <wsdl:output message="tns:DestekListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DestekDetayEkle">
+      <wsdl:input message="tns:DestekDetayEkleSoapIn" />
+      <wsdl:output message="tns:DestekDetayEkleSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DestekDetayList">
+      <wsdl:input message="tns:DestekDetayListSoapIn" />
+      <wsdl:output message="tns:DestekDetayListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="KulList">
+      <wsdl:input message="tns:KulListSoapIn" />
+      <wsdl:output message="tns:KulListSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EpostadanKulId">
+      <wsdl:input message="tns:EpostadanKulIdSoapIn" />
+      <wsdl:output message="tns:EpostadanKulIdSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="WebServiceHttpGet">
+    <wsdl:operation name="GetItems">
+      <wsdl:input message="tns:GetItemsHttpGetIn" />
+      <wsdl:output message="tns:GetItemsHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="kullanicilar">
+      <wsdl:input message="tns:kullanicilarHttpGetIn" />
+      <wsdl:output message="tns:kullanicilarHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="KasaHareketleri">
+      <wsdl:input message="tns:KasaHareketleriHttpGetIn" />
+      <wsdl:output message="tns:KasaHareketleriHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="destek">
+      <wsdl:input message="tns:destekHttpGetIn" />
+      <wsdl:output message="tns:destekHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="KullanicilarRef">
+      <wsdl:input message="tns:KullanicilarRefHttpGetIn" />
+      <wsdl:output message="tns:KullanicilarRefHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetItemsGecenler">
+      <wsdl:input message="tns:GetItemsGecenlerHttpGetIn" />
+      <wsdl:output message="tns:GetItemsGecenlerHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpGetIn" />
+      <wsdl:output message="tns:HelloWorldHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="KulEkle">
+      <wsdl:input message="tns:KulEkleHttpGetIn" />
+      <wsdl:output message="tns:KulEkleHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DestekEkle">
+      <wsdl:input message="tns:DestekEkleHttpGetIn" />
+      <wsdl:output message="tns:DestekEkleHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DestekGuncelle">
+      <wsdl:input message="tns:DestekGuncelleHttpGetIn" />
+      <wsdl:output message="tns:DestekGuncelleHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DestekList">
+      <wsdl:input message="tns:DestekListHttpGetIn" />
+      <wsdl:output message="tns:DestekListHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DestekDetayEkle">
+      <wsdl:input message="tns:DestekDetayEkleHttpGetIn" />
+      <wsdl:output message="tns:DestekDetayEkleHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DestekDetayList">
+      <wsdl:input message="tns:DestekDetayListHttpGetIn" />
+      <wsdl:output message="tns:DestekDetayListHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="KulList">
+      <wsdl:input message="tns:KulListHttpGetIn" />
+      <wsdl:output message="tns:KulListHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EpostadanKulId">
+      <wsdl:input message="tns:EpostadanKulIdHttpGetIn" />
+      <wsdl:output message="tns:EpostadanKulIdHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="WebServiceHttpPost">
+    <wsdl:operation name="GetItems">
+      <wsdl:input message="tns:GetItemsHttpPostIn" />
+      <wsdl:output message="tns:GetItemsHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="kullanicilar">
+      <wsdl:input message="tns:kullanicilarHttpPostIn" />
+      <wsdl:output message="tns:kullanicilarHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="KasaHareketleri">
+      <wsdl:input message="tns:KasaHareketleriHttpPostIn" />
+      <wsdl:output message="tns:KasaHareketleriHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="destek">
+      <wsdl:input message="tns:destekHttpPostIn" />
+      <wsdl:output message="tns:destekHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="KullanicilarRef">
+      <wsdl:input message="tns:KullanicilarRefHttpPostIn" />
+      <wsdl:output message="tns:KullanicilarRefHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetItemsGecenler">
+      <wsdl:input message="tns:GetItemsGecenlerHttpPostIn" />
+      <wsdl:output message="tns:GetItemsGecenlerHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpPostIn" />
+      <wsdl:output message="tns:HelloWorldHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="KulEkle">
+      <wsdl:input message="tns:KulEkleHttpPostIn" />
+      <wsdl:output message="tns:KulEkleHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DestekEkle">
+      <wsdl:input message="tns:DestekEkleHttpPostIn" />
+      <wsdl:output message="tns:DestekEkleHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DestekGuncelle">
+      <wsdl:input message="tns:DestekGuncelleHttpPostIn" />
+      <wsdl:output message="tns:DestekGuncelleHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DestekList">
+      <wsdl:input message="tns:DestekListHttpPostIn" />
+      <wsdl:output message="tns:DestekListHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DestekDetayEkle">
+      <wsdl:input message="tns:DestekDetayEkleHttpPostIn" />
+      <wsdl:output message="tns:DestekDetayEkleHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DestekDetayList">
+      <wsdl:input message="tns:DestekDetayListHttpPostIn" />
+      <wsdl:output message="tns:DestekDetayListHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="KulList">
+      <wsdl:input message="tns:KulListHttpPostIn" />
+      <wsdl:output message="tns:KulListHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="EpostadanKulId">
+      <wsdl:input message="tns:EpostadanKulIdHttpPostIn" />
+      <wsdl:output message="tns:EpostadanKulIdHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WebServiceSoap" type="tns:WebServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetItems">
+      <soap:operation soapAction="http://tempuri.org/GetItems" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="kullanicilar">
+      <soap:operation soapAction="http://tempuri.org/kullanicilar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KasaHareketleri">
+      <soap:operation soapAction="http://tempuri.org/KasaHareketleri" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="destek">
+      <soap:operation soapAction="http://tempuri.org/destek" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KullanicilarRef">
+      <soap:operation soapAction="http://tempuri.org/KullanicilarRef" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetItemsGecenler">
+      <soap:operation soapAction="http://tempuri.org/GetItemsGecenler" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KulEkle">
+      <soap:operation soapAction="http://tempuri.org/KulEkle" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DestekEkle">
+      <soap:operation soapAction="http://tempuri.org/DestekEkle" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DestekGuncelle">
+      <soap:operation soapAction="http://tempuri.org/DestekGuncelle" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DestekList">
+      <soap:operation soapAction="http://tempuri.org/DestekList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DestekDetayEkle">
+      <soap:operation soapAction="http://tempuri.org/DestekDetayEkle" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DestekDetayList">
+      <soap:operation soapAction="http://tempuri.org/DestekDetayList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KulList">
+      <soap:operation soapAction="http://tempuri.org/KulList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EpostadanKulId">
+      <soap:operation soapAction="http://tempuri.org/EpostadanKulId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WebServiceSoap12" type="tns:WebServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetItems">
+      <soap12:operation soapAction="http://tempuri.org/GetItems" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="kullanicilar">
+      <soap12:operation soapAction="http://tempuri.org/kullanicilar" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KasaHareketleri">
+      <soap12:operation soapAction="http://tempuri.org/KasaHareketleri" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="destek">
+      <soap12:operation soapAction="http://tempuri.org/destek" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KullanicilarRef">
+      <soap12:operation soapAction="http://tempuri.org/KullanicilarRef" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetItemsGecenler">
+      <soap12:operation soapAction="http://tempuri.org/GetItemsGecenler" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KulEkle">
+      <soap12:operation soapAction="http://tempuri.org/KulEkle" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DestekEkle">
+      <soap12:operation soapAction="http://tempuri.org/DestekEkle" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DestekGuncelle">
+      <soap12:operation soapAction="http://tempuri.org/DestekGuncelle" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DestekList">
+      <soap12:operation soapAction="http://tempuri.org/DestekList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DestekDetayEkle">
+      <soap12:operation soapAction="http://tempuri.org/DestekDetayEkle" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DestekDetayList">
+      <soap12:operation soapAction="http://tempuri.org/DestekDetayList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KulList">
+      <soap12:operation soapAction="http://tempuri.org/KulList" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EpostadanKulId">
+      <soap12:operation soapAction="http://tempuri.org/EpostadanKulId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WebServiceHttpGet" type="tns:WebServiceHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="GetItems">
+      <http:operation location="/GetItems" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="kullanicilar">
+      <http:operation location="/kullanicilar" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KasaHareketleri">
+      <http:operation location="/KasaHareketleri" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="destek">
+      <http:operation location="/destek" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KullanicilarRef">
+      <http:operation location="/KullanicilarRef" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetItemsGecenler">
+      <http:operation location="/GetItemsGecenler" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KulEkle">
+      <http:operation location="/KulEkle" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DestekEkle">
+      <http:operation location="/DestekEkle" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DestekGuncelle">
+      <http:operation location="/DestekGuncelle" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DestekList">
+      <http:operation location="/DestekList" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DestekDetayEkle">
+      <http:operation location="/DestekDetayEkle" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DestekDetayList">
+      <http:operation location="/DestekDetayList" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KulList">
+      <http:operation location="/KulList" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EpostadanKulId">
+      <http:operation location="/EpostadanKulId" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="WebServiceHttpPost" type="tns:WebServiceHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="GetItems">
+      <http:operation location="/GetItems" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="kullanicilar">
+      <http:operation location="/kullanicilar" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KasaHareketleri">
+      <http:operation location="/KasaHareketleri" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="destek">
+      <http:operation location="/destek" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KullanicilarRef">
+      <http:operation location="/KullanicilarRef" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetItemsGecenler">
+      <http:operation location="/GetItemsGecenler" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KulEkle">
+      <http:operation location="/KulEkle" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DestekEkle">
+      <http:operation location="/DestekEkle" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DestekGuncelle">
+      <http:operation location="/DestekGuncelle" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DestekList">
+      <http:operation location="/DestekList" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DestekDetayEkle">
+      <http:operation location="/DestekDetayEkle" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DestekDetayList">
+      <http:operation location="/DestekDetayList" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="KulList">
+      <http:operation location="/KulList" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EpostadanKulId">
+      <http:operation location="/EpostadanKulId" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WebService">
+    <wsdl:port name="WebServiceSoap" binding="tns:WebServiceSoap">
+      <soap:address location="http://www.hitityazilim.com/WebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WebServiceSoap12" binding="tns:WebServiceSoap12">
+      <soap12:address location="http://www.hitityazilim.com/WebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WebServiceHttpGet" binding="tns:WebServiceHttpGet">
+      <http:address location="http://www.hitityazilim.com/WebService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="WebServiceHttpPost" binding="tns:WebServiceHttpPost">
+      <http:address location="http://www.hitityazilim.com/WebService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

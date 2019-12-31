@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://ws.esaglik.surat.com.tr/" targetNamespace="http://ws.esaglik.surat.com.tr/" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="SistemKodlari" type="tns:SistemKodlari" />
+  <xs:element name="SistemKodlariResponse" type="tns:SistemKodlariResponse" />
+  <xs:element name="SistemKodlariSayfaGetir" type="tns:SistemKodlariSayfaGetir" />
+  <xs:element name="SistemKodlariSayfaGetirResponse" type="tns:SistemKodlariSayfaGetirResponse" />
+  <xs:element name="Sistemler" type="tns:Sistemler" />
+  <xs:element name="SistemlerResponse" type="tns:SistemlerResponse" />
+  <xs:element name="genelHataTanimi" type="tns:hataTanimi" />
+  <xs:element name="hatalar" type="tns:hata" />
+  <xs:complexType name="SistemKodlari">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="sistemKoduInput" type="xs:string" />
+      <xs:element minOccurs="0" name="tarihInput" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SistemKodlariResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="sistemKodlariOutput" type="tns:kodDegerleriResponse" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="kodDegerleriResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="hata" type="tns:hata" />
+      <xs:element minOccurs="0" name="kodDegerleri" type="tns:kodDegerleri" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="hata">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="yerelHataAciklamasi" type="xs:string" />
+      <xs:element minOccurs="0" name="hataTanimi" type="tns:hataTanimi" />
+      <xs:element minOccurs="0" name="yerelHataListesi">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" maxOccurs="unbounded" name="hata" type="tns:hataOgesi" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element minOccurs="0" name="throwableStackTrace" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute name="yerelHataKapsami" type="xs:string" />
+    <xs:attribute name="yerelHataKodu" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="hataTanimi">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="genelHataAciklamasi" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute name="genelHataKapsami" type="xs:string" />
+    <xs:attribute name="genelHataKodu" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="hataOgesi">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="hataAciklamasi" type="xs:string" />
+    </xs:sequence>
+    <xs:attribute name="hataKapsami" type="xs:string" />
+    <xs:attribute name="hataKodu" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="kodDegerleri">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="kodDegeriSatirlari" nillable="true" type="tns:kodDegeriSatiri" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="kodDegeriSatiri">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="kodDegeriKolonlari" nillable="true" type="tns:kodDegeriKolonu" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="kodDegeriKolonu">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="kolonIcerigi" type="tns:kodDegeriKolonIcerigi" />
+    </xs:sequence>
+    <xs:attribute name="kolonAdi" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="kodDegeriKolonIcerigi">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="kodDegeriKolonIcerigiTipi" type="tns:kodDegeriKolonIcerigiTipi" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="SistemKodlariSayfaGetir">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="sistemKoduInput" type="xs:string" />
+      <xs:element minOccurs="0" name="tarihInput" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="skrsKod" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SistemKodlariSayfaGetirResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="sistemKodlariOutput" type="tns:kodDegerleriResponse" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Sistemler">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="SistemlerResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="sistemlerOutput" type="tns:wsskrsSistemlerResponse" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="wsskrsSistemlerResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="hata" type="tns:hata" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="sistemler" nillable="true" type="tns:responseSistemler" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="responseSistemler">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="adi" type="xs:string" />
+      <xs:element minOccurs="0" name="aktif" type="xs:boolean" />
+      <xs:element minOccurs="0" name="guncellenmeTarihi" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="hata" type="tns:hata" />
+      <xs:element minOccurs="0" name="hl7Kodu" type="xs:string" />
+      <xs:element minOccurs="0" name="kodu" type="xs:string" />
+      <xs:element minOccurs="0" name="olusturulmaTarihi" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="kodDegeriKolonIcerigiTipi">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="NUMBER" />
+      <xs:enumeration value="BOOLEAN" />
+      <xs:enumeration value="TEXT" />
+      <xs:enumeration value="DATE" />
+      <xs:enumeration value="NULL" />
+      <xs:enumeration value="UNKNOWN" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

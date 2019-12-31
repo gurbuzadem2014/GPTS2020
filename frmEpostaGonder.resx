@@ -1,0 +1,235 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="meMesaj.EditValue" xml:space="preserve">
+    <value>13.07.2014 
+Hatırlatma Ekleme ve Ana Sayfada Gösterilmesi Sağlandı.
+
+05.07.2014
+Hızlı Buton Grupları, ekleme çıkarma aktif ve sıra no verilmesi sağlandı.
+Satış  Ekranında Seçilen müşteriye en son satış fiyatları görümesi sağlandı.
+
+05.03.2014
+Yedek Alınan Dosyanın Sıkıştırılması(Zip) sağlandı.
+
+27.12.2013
+1.Stok Kartında Kar Yüzdesi Eklendi.
+
+15.12.2013
+1.Hızlı Butonlar sabitlenmesi sağlandı.
+2.
+
+27.10.2013
+1.Satış Faturasında ve Müşteri Kartında Firma Ünvanı Alanı Eklendi.
+2.Satış Faturasında Ürün Adına tıklandığında son satış ve alış hareketlerinin görünmesi sağlandı.
+3.Eksik Listesinin E-Posta Gönderilmesi Sağlandı.
+
+14.10.2013
+1-Sipariş Oluşturma Ekranında var olan siparişlerin gösterilmesi sağlandı.
+2-Alış Raprorunda ödemeler(Nakit,k.kartı ve çek) ayrıldı.
+3-Alış Faturasında iade alanı eklendi.
+
+13.10.2013
+1-Stok Arama Ekranı Kullanıcıya Göre Alanların Gösterilmesi Sağlandı.
+2-Bonus (para puan) revize edildi.
+3-Satış Faturasında her stok için  yüzde iskonto yapılması sağlandı.
+4-Program açılırken kullanıcıya göre  otomatik pencere açılması sağlandı.
+5-Müşteri Hareketlerinde kullanılan bonus listesi eklendi.
+
+06-10-2013
+1-Program açılırken satış penceresinin otomatik açılması sağlandı
+2-Satış raporları ve müşteri hareketlerinde nakit, kredi kartı, açık hesap gibi ödeme tiplerinin ayrı ayrı görülmesi sağlandı
+3-Birden çok kullanıcı çalışmasında geliştirmeler yapıldı
+4.Alış Faturasında Yeni Stok Kartı Ekleyerek Kaydedilmesi Sağlandı.
+
+29-09-2013
+1-Satış penceresinde son satışları görmek için açılan geçmiş fişler penceresinden müşterilere sağ tıklayarak ödeme alınması sağlandı
+2-Müşteri hareketlerinde ödemeleri ve alışverişleri kısımlarında geliştirmeler yapıldı
+3-Ödeme al (ctrl+8) ve ödeme yap  (ctrl+9) pencerelerinde müşteri veya tedarikçi arama şekillerinde geliştirmeler yapıldı
+4-Alış faturasında kdv hariç fatura girişinde geliştirmeler yapıldı
+5-Geçmiş alış fiş ekranında geliştirmeler yapıldı
+6-F8 ürün bul ekranının alt kısmındaki ürünün geçmiş alış fişlerinde kaç adet alındığı bilgisi eklendi. 
+Ayrıca fişe tıklayarak detay görünmesi sağlandı.
+
+22.09.2013
+1.Satış iade düzeltildi.
+2.Eksik Listesi için Miktar Girişi Yapıldı. 
+
+01.09.2013
+1.istenilen saatte günlük Otomatik Yedek Alınması Sağlandı.
+2.Tedarikçi Hareketlerinde altta ödemeler listesinde ödemenin silinmesi sağlandı.
+
+30.08.2013
+1.Kasa Hareketi Düzelt ekranında açıklamanın düzenlenmesi Sağlandı.
+2.MÜŞTERİ HAREKETLERİNDE ALTTA ÖDEME DETAYINDAKİ İŞLEMLERİN SİLİNMESİ SAĞLANDI.
+
+18.08.2013
+1-stok kartında kopyala butonuna basıldığında üretici kodununsilinmesi sağlandı. Ayrıca stok adeti ve kritik adetin silinmesi sağlandı.
+2.Tedarikçi Aramada Tedarikçi Kartına gidilmesi Sağlandı.
+
+17.08.2013
+1.alış faturasında, f8 stok bulda ve stok listesinde  ürünün alış ve satış fiyatları gözönünde bulundurularak % kaç kar alanı eklendi.
+2.f8 ürün bulda ürüne sağ tıklamada ;
+   stok kartı
+   stok hareketleri
+   etiket bas  seçenekleri eklendi.
+3.kasa hareketlerinde 
+  tedarikçi ödemesi, müşteri tahsilatı olarak görünmesi sağlandı
+4.f8 ürün bulda ürüne tıklandığında alttaki boş alanda diğer satış fiyatları görünmesi sağlandı.
+alışta alttaki grid (kimden ne zaman hangi tarhte kaç adet alındığı)
+5.
+
+11-08-2013
+-tedarikçi listesinde filtreleme sonrası görünmeyen sütunlar düzeltildi
+-alış faturasında adet x f8 ürün bul daki sorun düzeltildi
+-banka kasası sıfırlama ve bakiye ekleme yapıldı
+-pratik sayım yapılıyor
+-kasa raporunda düzeltmeler yapıldı
+-kasa raporunda seçeneklere tedarikçilere yapılan ödemeler eklendi
+-tedarikçi kartına özel not eklendi
+-stok listesinde ürüne sağ tıklayarak hareketlerini (ürünün tüm alış,satış ve tek pencerede extresi) görebilme yapıldı
+-satış faturasında f4 müşteri bul daki müşteri arama esnasında müşterinin bakiyesinin anlık olarak görünmesi sağlandı
+
+
+Yapılanlar 07.08.2013
+Satışta bu fişin maliyetinde kar sütunu alt toplamı eklendi.
+Gün Sonu Raporunda iki zaman aralığı raporunun alınması sağlandı.
+Stok Sayımında fark  tutarı alanı eklendi.
+
+Yapılanlar 04.08.2013
+Satış / Alış Faturası ve Satış/Alış  Rapolarında ürün bazında raporlarında Stok Hareket Raporları Eklendi.
+Satış Faturasında Sağ tuşa bu fişin maliyeti eklendi.
+
+Yapılanlar 03.08.2013
+Kasa Hareketinin Tarih ve Tutar Kısmının Düzeltilmesi Sağlandı.
+
+Yapılanlar 22.07.2013
+Fiş Düzelt ve iptal düzeltildi.
+Teklif Modülü Yapılıyor.%50
+Kullanıcı Yetkileri Yapılıyor %60
+
+Yapılanlar 16.07.2013
+Etiket ekranında düzenlemeler yapıldı.(Etiket Adedi)
+
+Yapılanlar 14.07.2013 
+SATIŞ TARİHİ DEĞİŞTİRİLMESİ SAĞLANDI.
+YAZRIMA HIZLANDIRILDI.
+KREDİ KARTI KAYDEDİLDİ.</value>
+  </data>
+</root>

@@ -1,0 +1,2754 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="PostBoxService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="PostBoxServiceEndpoint_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <sp:HttpsToken RequireClientCertificate="false" />
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256 />
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict />
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://schemas.datacontract.org/2004/07/eFaturaWebService" />
+      <xs:import namespace="http://schemas.datacontract.org/2004/07/eFaturaCoreLib.Common" />
+      <xs:import namespace="http://schemas.datacontract.org/2004/07/CommonLib.Helpers" />
+      <xs:import namespace="http://schemas.datacontract.org/2004/07/CommonLib" />
+      <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xs:element name="Ping">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="PingResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="PingResult" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ALive">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="key" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="ALiveResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="ALiveResult" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Login">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/eFaturaWebService" minOccurs="0" name="login" nillable="true" type="q1:LoginType" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="LoginResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="LoginResult" type="xs:boolean" />
+            <xs:element minOccurs="0" name="sessionID" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="Logout">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionID" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="LogoutResponse">
+        <xs:complexType>
+          <xs:sequence />
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="sendEnvelope">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/eFaturaWebService" minOccurs="0" name="envelope" nillable="true" type="q2:DocumentType" />
+            <xs:element minOccurs="0" name="sessionID" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="sendEnvelopeResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sendEnvelopeResult" type="xs:boolean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="sendInvoice">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/eFaturaWebService" minOccurs="0" name="invoice" nillable="true" type="q3:DocumentType" />
+            <xs:element minOccurs="0" name="alias" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="sessionID" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="sendInvoiceResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sendInvoiceResult" type="xs:boolean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="sendApplicationResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q4="http://schemas.datacontract.org/2004/07/eFaturaWebService" minOccurs="0" name="appResp" nillable="true" type="q4:DocumentType" />
+            <xs:element minOccurs="0" name="alias" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="sessionID" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="sendApplicationResponseResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sendApplicationResponseResult" type="xs:boolean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="sendEnvelopeEx">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q5="http://schemas.datacontract.org/2004/07/eFaturaWebService" minOccurs="0" name="envelope" nillable="true" type="q5:DocumentType" />
+            <xs:element minOccurs="0" name="sessionID" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="sendEnvelopeExResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sendEnvelopeExResult" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="sendInvoiceEx">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q6="http://schemas.datacontract.org/2004/07/eFaturaWebService" minOccurs="0" name="invoice" nillable="true" type="q6:DocumentType" />
+            <xs:element minOccurs="0" name="alias" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="sessionID" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="sendInvoiceExResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sendInvoiceExResult" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="sendSignedInvoice">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q7="http://schemas.datacontract.org/2004/07/eFaturaWebService" minOccurs="0" name="invoice" nillable="true" type="q7:DocumentType" />
+            <xs:element minOccurs="0" name="alias" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="sessionID" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="sendSignedInvoiceResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sendSignedInvoiceResult" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="sendApplicationResponseEx">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q8="http://schemas.datacontract.org/2004/07/eFaturaWebService" minOccurs="0" name="appResp" nillable="true" type="q8:DocumentType" />
+            <xs:element minOccurs="0" name="alias" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="sessionID" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="sendApplicationResponseExResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sendApplicationResponseExResult" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="sendEArchiveDocument">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q9="http://schemas.datacontract.org/2004/07/eFaturaWebService" minOccurs="0" name="document" nillable="true" type="q9:DocumentType" />
+            <xs:element xmlns:q10="http://schemas.datacontract.org/2004/07/eFaturaCoreLib.Common" minOccurs="0" name="docType" type="q10:EArchiveDocumentTypes" />
+            <xs:element minOccurs="0" name="isSigned" type="xs:boolean" />
+            <xs:element minOccurs="0" name="sessionID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="xsltUuid" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="sendEArchiveDocumentResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sendEArchiveDocumentResult" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="receiveDocument">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionID" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="receiveDocumentResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="receiveDocumentResult" type="xs:boolean" />
+            <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/eFaturaWebService" minOccurs="0" name="document" nillable="true" type="q11:DocumentType" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="receiveDone">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="fileID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="sessionID" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="receiveDoneResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="receiveDoneResult" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="receiveInvoice">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionID" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="receiveInvoiceResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="receiveInvoiceResult" type="xs:boolean" />
+            <xs:element xmlns:q12="http://schemas.datacontract.org/2004/07/eFaturaWebService" minOccurs="0" name="document" nillable="true" type="q12:ElementType" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="receiveInvoiceDone">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="uuid" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="sessionID" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="receiveInvoiceDoneResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="receiveInvoiceDoneResult" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="receiveApplicationResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionID" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="receiveApplicationResponseResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="receiveApplicationResponseResult" type="xs:boolean" />
+            <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/eFaturaWebService" minOccurs="0" name="document" nillable="true" type="q13:ElementType" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="receiveApplicationResponseDone">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="uuid" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="sessionID" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="receiveApplicationResponseDoneResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="receiveApplicationResponseDoneResult" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getApplicationResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="envelopeID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="sessionID" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getApplicationResponseResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="getApplicationResponseResult" type="xs:boolean" />
+            <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/eFaturaWebService" minOccurs="0" name="document" nillable="true" type="q14:DocumentType" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getInvoiceStatus">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="uuid" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="sessionID" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getInvoiceStatusResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="getInvoiceStatusResult" type="xs:boolean" />
+            <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/CommonLib.Helpers" minOccurs="0" name="status" type="q15:InvoiceStatus" />
+            <xs:element minOccurs="0" name="statusDescription" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="envelopeId" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getAppRespStatus">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="uuid" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="sessionID" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getAppRespStatusResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="getAppRespStatusResult" type="xs:boolean" />
+            <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/eFaturaCoreLib.Common" minOccurs="0" name="status" type="q16:AppRespStatus" />
+            <xs:element minOccurs="0" name="statusDescription" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="envelopeId" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getEnvelopeList">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="beginDate" type="xs:dateTime" />
+            <xs:element minOccurs="0" name="endDate" type="xs:dateTime" />
+            <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/CommonLib" minOccurs="0" name="opType" type="q17:SendRecvType" />
+            <xs:element minOccurs="0" name="sessionID" nillable="true" type="xs:string" />
+            <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/eFaturaCoreLib.Common" minOccurs="0" name="dateBy" type="q18:PostBoxDateType" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getEnvelopeListResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q19="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getEnvelopeListResult" nillable="true" type="q19:ArrayOfstring" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getEnvelope">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="envelopeID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="sessionID" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getEnvelopeResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/eFaturaWebService" minOccurs="0" name="getEnvelopeResult" nillable="true" type="q20:DocumentType" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getInvoiceList">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="beginDate" type="xs:dateTime" />
+            <xs:element minOccurs="0" name="endDate" type="xs:dateTime" />
+            <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/CommonLib" minOccurs="0" name="opType" type="q21:SendRecvType" />
+            <xs:element minOccurs="0" name="sessionID" nillable="true" type="xs:string" />
+            <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/eFaturaCoreLib.Common" minOccurs="0" name="dateBy" type="q22:InvoiceDateType" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getInvoiceListResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q23="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getInvoiceListResult" nillable="true" type="q23:ArrayOfstring" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getInvoice">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="invoiceID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="sessionID" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getInvoiceResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/eFaturaWebService" minOccurs="0" name="getInvoiceResult" nillable="true" type="q24:DocumentType" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getUserList">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/eFaturaWebService" minOccurs="0" name="login" nillable="true" type="q25:LoginType" />
+            <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/CommonLib" minOccurs="0" name="listType" type="q26:UserListType" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getUserListResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/eFaturaWebService" minOccurs="0" name="getUserListResult" nillable="true" type="q27:DocumentType" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getUserListNew">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/eFaturaWebService" minOccurs="0" name="login" nillable="true" type="q28:LoginType" />
+            <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/CommonLib" minOccurs="0" name="listType" type="q29:UserListType" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getUserListNewResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/eFaturaWebService" minOccurs="0" name="getUserListNewResult" nillable="true" type="q30:DocumentType" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getApprovalFlowList">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionID" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getApprovalFlowListResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="getApprovalFlowListResult" type="xs:boolean" />
+            <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/eFaturaWebService" minOccurs="0" name="document" nillable="true" type="q31:DocumentType" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="setApprovalFlowId">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="invoiceUuid" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="flowId" type="xs:int" />
+            <xs:element minOccurs="0" name="sessionID" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="setApprovalFlowIdResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="setApprovalFlowIdResult" type="xs:boolean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getApprovalFlowRes">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="invoiceUuid" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="flowId" type="xs:int" />
+            <xs:element minOccurs="0" name="sessionID" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getApprovalFlowResResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="getApprovalFlowResResult" type="xs:boolean" />
+            <xs:element minOccurs="0" name="flowRes" type="xs:int" />
+            <xs:element minOccurs="0" name="flowAction" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getDocumentStatus">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="docType" type="xs:int" />
+            <xs:element minOccurs="0" name="uuid" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="relRef" type="xs:int" />
+            <xs:element minOccurs="0" name="sessionID" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getDocumentStatusResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="respStatus" type="xs:int" />
+            <xs:element minOccurs="0" name="responseCode" type="xs:int" />
+            <xs:element minOccurs="0" name="responseDesc" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="envelopeId" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getDocumentStatusEx">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="docType" type="xs:int" />
+            <xs:element minOccurs="0" name="uuid" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="relRef" type="xs:int" />
+            <xs:element minOccurs="0" name="sessionID" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getDocumentStatusExResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="respStatus" type="xs:int" />
+            <xs:element minOccurs="0" name="responseCode" type="xs:int" />
+            <xs:element minOccurs="0" name="responseDesc" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="envelopeId" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="currentDate" type="xs:dateTime" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getEArchiveXslt">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionID" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getEArchiveXsltResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="getEArchiveXsltResult" type="xs:boolean" />
+            <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/eFaturaWebService" minOccurs="0" name="document" nillable="true" type="q32:DocumentType" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getInvoiceApplicationResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="uuid" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getInvoiceApplicationResponseResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="getInvoiceApplicationResponseResult" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getInvoiceResponseData">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="uuid" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="responseType" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getInvoiceResponseDataResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="getInvoiceResponseDataResult" type="xs:boolean" />
+            <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/eFaturaWebService" minOccurs="0" name="document" nillable="true" type="q33:DocumentType" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="setApplicationResponseOption">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="option" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="setApplicationResponseOptionResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="setApplicationResponseOptionResult" type="xs:boolean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getEArchiveInvoicePdfData">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="uuid" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="allInvoicesOrJustSigned" type="xs:boolean" />
+            <xs:element minOccurs="0" name="isCanceled" type="xs:boolean" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getEArchiveInvoicePdfDataResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="getEArchiveInvoicePdfDataResult" type="xs:boolean" />
+            <xs:element minOccurs="0" name="pdfData" nillable="true" type="xs:base64Binary" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getDocumentData">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="uuid" nillable="true" type="xs:string" />
+            <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/eFaturaWebService" minOccurs="0" name="docType" type="q34:GetDocumentType" />
+            <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/eFaturaWebService" minOccurs="0" name="dataType" type="q35:DocumentDataType" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getDocumentDataResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/eFaturaWebService" minOccurs="0" name="getDocumentDataResult" nillable="true" type="q36:DocumentType" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getReconciliationList">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="begDate" type="xs:dateTime" />
+            <xs:element minOccurs="0" name="endDate" type="xs:dateTime" />
+            <xs:element minOccurs="0" name="begNum" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="endNum" nillable="true" type="xs:string" />
+            <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/CommonLib" minOccurs="0" name="opType" type="q37:SendRecvType" />
+            <xs:element minOccurs="0" name="docType" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getReconciliationListResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q38="http://schemas.datacontract.org/2004/07/eFaturaWebService" minOccurs="0" name="getReconciliationListResult" nillable="true" type="q38:DocumentType" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="sendReconciliationReport">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q39="http://schemas.datacontract.org/2004/07/eFaturaWebService" minOccurs="0" name="report" nillable="true" type="q39:DocumentType" />
+            <xs:element minOccurs="0" name="sessionID" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="sendReconciliationReportResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sendReconciliationReportResult" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="createElementId">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="year" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="invoicePrefix" nillable="true" type="xs:string" />
+            <xs:element xmlns:q40="http://schemas.datacontract.org/2004/07/eFaturaWebService" minOccurs="0" name="docType" type="q40:GetDocumentType" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="createElementIdResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="createElementIdResult" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="cancelEArchiveInvoice">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="uuid" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="elementId" nillable="true" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="cancelEArchiveInvoiceResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="cancelEArchiveInvoiceResult" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SendEArchiveListForReconcilition">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="beginDate" type="xs:dateTime" />
+            <xs:element minOccurs="0" name="endDate" type="xs:dateTime" />
+            <xs:element minOccurs="0" name="sessionID" nillable="true" type="xs:string" />
+            <xs:element xmlns:q41="http://schemas.datacontract.org/2004/07/CommonLib" minOccurs="0" name="invoiceList" nillable="true" type="q41:ArrayOfReconInvoiceType" />
+            <xs:element xmlns:q42="http://schemas.datacontract.org/2004/07/CommonLib" minOccurs="0" name="invoiceType" type="q42:InvoiceType" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SendEArchiveListForReconcilitionResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="SendEArchiveListForReconcilitionResult" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SendDocument">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionID" nillable="true" type="xs:string" />
+            <xs:element xmlns:q43="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="paramList" nillable="true" type="q43:ArrayOfstring" />
+            <xs:element xmlns:q44="http://schemas.datacontract.org/2004/07/eFaturaWebService" minOccurs="0" name="document" nillable="true" type="q44:DocumentType" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SendDocumentResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q45="http://schemas.datacontract.org/2004/07/eFaturaWebService" minOccurs="0" name="SendDocumentResult" nillable="true" type="q45:ResultType" />
+            <xs:element minOccurs="0" name="refId" type="xs:int" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetDocument">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionID" nillable="true" type="xs:string" />
+            <xs:element xmlns:q46="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="paramList" nillable="true" type="q46:ArrayOfstring" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetDocumentResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q47="http://schemas.datacontract.org/2004/07/eFaturaWebService" minOccurs="0" name="GetDocumentResult" nillable="true" type="q47:ResultType" />
+            <xs:element xmlns:q48="http://schemas.datacontract.org/2004/07/eFaturaWebService" minOccurs="0" name="document" nillable="true" type="q48:ElementType" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetDocumentDone">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="uuid" nillable="true" type="xs:string" />
+            <xs:element xmlns:q49="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="paramList" nillable="true" type="q49:ArrayOfstring" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetDocumentDoneResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q50="http://schemas.datacontract.org/2004/07/eFaturaWebService" minOccurs="0" name="GetDocumentDoneResult" nillable="true" type="q50:ResultType" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetDocumentStatus">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="uuid" nillable="true" type="xs:string" />
+            <xs:element xmlns:q51="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="paramList" nillable="true" type="q51:ArrayOfstring" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetDocumentStatusResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q52="http://schemas.datacontract.org/2004/07/eFaturaWebService" minOccurs="0" name="GetDocumentStatusResult" nillable="true" type="q52:ResultType" />
+            <xs:element xmlns:q53="http://schemas.datacontract.org/2004/07/eFaturaWebService" minOccurs="0" name="statusInfo" nillable="true" type="q53:DocumentStatusType" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetDocumentData">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionID" nillable="true" type="xs:string" />
+            <xs:element minOccurs="0" name="uuid" nillable="true" type="xs:string" />
+            <xs:element xmlns:q54="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="paramList" nillable="true" type="q54:ArrayOfstring" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetDocumentDataResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q55="http://schemas.datacontract.org/2004/07/eFaturaWebService" minOccurs="0" name="GetDocumentDataResult" nillable="true" type="q55:ResultType" />
+            <xs:element xmlns:q56="http://schemas.datacontract.org/2004/07/eFaturaWebService" minOccurs="0" name="document" nillable="true" type="q56:DocumentType" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetDocumentList">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionID" nillable="true" type="xs:string" />
+            <xs:element xmlns:q57="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="paramList" nillable="true" type="q57:ArrayOfstring" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetDocumentListResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q58="http://schemas.datacontract.org/2004/07/eFaturaWebService" minOccurs="0" name="GetDocumentListResult" nillable="true" type="q58:ResultType" />
+            <xs:element xmlns:q59="http://schemas.datacontract.org/2004/07/eFaturaWebService" minOccurs="0" name="docList" nillable="true" type="q59:ArrayOfDocument" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetValidateGIBUser">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="sessionID" nillable="true" type="xs:string" />
+            <xs:element xmlns:q60="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="paramList" nillable="true" type="q60:ArrayOfstring" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="GetValidateGIBUserResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:q61="http://schemas.datacontract.org/2004/07/eFaturaWebService" minOccurs="0" name="GetValidateGIBUserResult" nillable="true" type="q61:ResultType" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="anyType" nillable="true" type="xs:anyType" />
+      <xs:element name="anyURI" nillable="true" type="xs:anyURI" />
+      <xs:element name="base64Binary" nillable="true" type="xs:base64Binary" />
+      <xs:element name="boolean" nillable="true" type="xs:boolean" />
+      <xs:element name="byte" nillable="true" type="xs:byte" />
+      <xs:element name="dateTime" nillable="true" type="xs:dateTime" />
+      <xs:element name="decimal" nillable="true" type="xs:decimal" />
+      <xs:element name="double" nillable="true" type="xs:double" />
+      <xs:element name="float" nillable="true" type="xs:float" />
+      <xs:element name="int" nillable="true" type="xs:int" />
+      <xs:element name="long" nillable="true" type="xs:long" />
+      <xs:element name="QName" nillable="true" type="xs:QName" />
+      <xs:element name="short" nillable="true" type="xs:short" />
+      <xs:element name="string" nillable="true" type="xs:string" />
+      <xs:element name="unsignedByte" nillable="true" type="xs:unsignedByte" />
+      <xs:element name="unsignedInt" nillable="true" type="xs:unsignedInt" />
+      <xs:element name="unsignedLong" nillable="true" type="xs:unsignedLong" />
+      <xs:element name="unsignedShort" nillable="true" type="xs:unsignedShort" />
+      <xs:element name="char" nillable="true" type="tns:char" />
+      <xs:simpleType name="char">
+        <xs:restriction base="xs:int" />
+      </xs:simpleType>
+      <xs:element name="duration" nillable="true" type="tns:duration" />
+      <xs:simpleType name="duration">
+        <xs:restriction base="xs:duration">
+          <xs:pattern value="\-?P(\d*D)?(T(\d*H)?(\d*M)?(\d*(\.\d*)?S)?)?" />
+          <xs:minInclusive value="-P10675199DT2H48M5.4775808S" />
+          <xs:maxInclusive value="P10675199DT2H48M5.4775807S" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="guid" nillable="true" type="tns:guid" />
+      <xs:simpleType name="guid">
+        <xs:restriction base="xs:string">
+          <xs:pattern value="[\da-fA-F]{8}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{4}-[\da-fA-F]{12}" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:attribute name="FactoryType" type="xs:QName" />
+      <xs:attribute name="Id" type="xs:ID" />
+      <xs:attribute name="Ref" type="xs:IDREF" />
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/eFaturaWebService" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/eFaturaWebService" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+      <xs:complexType name="LoginType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="appStr" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="passWord" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="source" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="userName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="version" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="LoginType" nillable="true" type="tns:LoginType" />
+      <xs:complexType name="DocumentType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="binaryData" nillable="true" type="tns:base64BinaryData" />
+          <xs:element minOccurs="0" name="currentDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="fileName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="hash" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="DocumentType" nillable="true" type="tns:DocumentType" />
+      <xs:complexType name="base64BinaryData">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Value" nillable="true" type="xs:base64Binary" />
+          <xs:element minOccurs="0" name="contentType" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="base64BinaryData" nillable="true" type="tns:base64BinaryData" />
+      <xs:complexType name="ElementType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="binaryData" nillable="true" type="tns:base64BinaryData" />
+          <xs:element minOccurs="0" name="currentDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="envelopeId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="fileName" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="gbLabel" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="hash" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="pkLabel" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ElementType" nillable="true" type="tns:ElementType" />
+      <xs:simpleType name="GetDocumentType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="EINVOICE">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="EARCHIVE">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="APPLICATIONRESPONSE">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="GetDocumentType" nillable="true" type="tns:GetDocumentType" />
+      <xs:simpleType name="DocumentDataType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="UBL">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="PDF">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="DocumentDataType" nillable="true" type="tns:DocumentDataType" />
+      <xs:complexType name="ResultType">
+        <xs:sequence>
+          <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="outputList" nillable="true" type="q1:ArrayOfstring" />
+          <xs:element minOccurs="0" name="resultCode" type="xs:int" />
+          <xs:element minOccurs="0" name="resultMsg" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ResultType" nillable="true" type="tns:ResultType" />
+      <xs:complexType name="DocumentStatusType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="code" type="xs:int" />
+          <xs:element minOccurs="0" name="currentDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="description" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="envelopeId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="isCancel" type="xs:boolean" />
+          <xs:element minOccurs="0" name="status" type="xs:int" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="DocumentStatusType" nillable="true" type="tns:DocumentStatusType" />
+      <xs:complexType name="ArrayOfDocument">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Document" nillable="true" type="tns:Document" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfDocument" nillable="true" type="tns:ArrayOfDocument" />
+      <xs:complexType name="Document">
+        <xs:sequence>
+          <xs:element xmlns:q2="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="docInfo" nillable="true" type="q2:ArrayOfstring" />
+          <xs:element minOccurs="0" name="documentId" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="documentUuid" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="Document" nillable="true" type="tns:Document" />
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/eFaturaCoreLib.Common" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/eFaturaCoreLib.Common" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xs:simpleType name="EArchiveDocumentTypes">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="INVOICE">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="REPORT">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="EArchiveDocumentTypes" nillable="true" type="tns:EArchiveDocumentTypes" />
+      <xs:simpleType name="AppRespStatus">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="TEMP">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">-99</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="PUSHQUEUEERROR">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">-11</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="SUSPEND">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">-5</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="DELETED">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">-4</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="FAIL">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">-1</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="RAW">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="PROCESSSED">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="SIGNED">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="ENVELOPED">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="EXTRACTED">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="UNRECEIVED">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">5</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="RECEIVED">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">6</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="AppRespStatus" nillable="true" type="tns:AppRespStatus" />
+      <xs:simpleType name="PostBoxDateType">
+        <xs:annotation>
+          <xs:appinfo>
+            <ActualType Name="unsignedByte" Namespace="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+          </xs:appinfo>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="byCREATED" />
+          <xs:enumeration value="byENVELOPEDATE" />
+          <xs:enumeration value="byCURRENTDATE" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="PostBoxDateType" nillable="true" type="tns:PostBoxDateType" />
+      <xs:simpleType name="InvoiceDateType">
+        <xs:annotation>
+          <xs:appinfo>
+            <ActualType Name="unsignedByte" Namespace="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+          </xs:appinfo>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="byCREATED" />
+          <xs:enumeration value="byISSUEDATE" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="InvoiceDateType" nillable="true" type="tns:InvoiceDateType" />
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/CommonLib.Helpers" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/CommonLib.Helpers" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xs:simpleType name="InvoiceStatus">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="TEMP">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">-99</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="PUSHQUEUEERROR">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">-11</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="SUSPEND">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">-5</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="DELETED">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">-4</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="FAIL">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">-1</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="RAW">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">0</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="PROCESSSED">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="SIGNED">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="ENVELOPED">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="EXTRACTED">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="UNRECEIVED">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">5</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="RECEIVED">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">6</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="InvoiceStatus" nillable="true" type="tns:InvoiceStatus" />
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/CommonLib" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/CommonLib" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xs:simpleType name="SendRecvType">
+        <xs:annotation>
+          <xs:appinfo>
+            <ActualType Name="unsignedByte" Namespace="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/2003/10/Serialization/" />
+          </xs:appinfo>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="SEND">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="RECV">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="SendRecvType" nillable="true" type="tns:SendRecvType" />
+      <xs:simpleType name="UserListType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="GBLIST" />
+          <xs:enumeration value="PKLIST" />
+          <xs:enumeration value="LIST4760">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">3</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="LIST5015">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">4</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="UserListType" nillable="true" type="tns:UserListType" />
+      <xs:complexType name="ArrayOfReconInvoiceType">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="ReconInvoiceType" nillable="true" type="tns:ReconInvoiceType" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfReconInvoiceType" nillable="true" type="tns:ArrayOfReconInvoiceType" />
+      <xs:complexType name="ReconInvoiceType">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Cancel" type="xs:boolean" />
+          <xs:element minOccurs="0" name="InvoiceDate" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="InvoiceNumber" nillable="true" type="xs:string" />
+          <xs:element minOccurs="0" name="InvoiceStatus" nillable="true" type="tns:EArchiveInvoiceStatusForRecon" />
+          <xs:element minOccurs="0" name="Uuid" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ReconInvoiceType" nillable="true" type="tns:ReconInvoiceType" />
+      <xs:simpleType name="EArchiveInvoiceStatusForRecon">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="SUCCESS">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">2</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="FAULT">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">-1</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+          <xs:enumeration value="QUEUE">
+            <xs:annotation>
+              <xs:appinfo>
+                <EnumerationValue xmlns="http://schemas.microsoft.com/2003/10/Serialization/">1</EnumerationValue>
+              </xs:appinfo>
+            </xs:annotation>
+          </xs:enumeration>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="EArchiveInvoiceStatusForRecon" nillable="true" type="tns:EArchiveInvoiceStatusForRecon" />
+      <xs:simpleType name="InvoiceType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="EINVOICE" />
+          <xs:enumeration value="EARCHIVE" />
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:element name="InvoiceType" nillable="true" type="tns:InvoiceType" />
+    </xs:schema>
+    <xs:schema xmlns:tns="http://schemas.microsoft.com/2003/10/Serialization/Arrays" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:complexType name="ArrayOfstring">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="ArrayOfstring" nillable="true" type="tns:ArrayOfstring" />
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:message name="IPostBoxService_Ping_InputMessage">
+    <wsdl:part name="parameters" element="tns:Ping" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_Ping_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PingResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_ALive_InputMessage">
+    <wsdl:part name="parameters" element="tns:ALive" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_ALive_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ALiveResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_Login_InputMessage">
+    <wsdl:part name="parameters" element="tns:Login" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_Login_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_Logout_InputMessage">
+    <wsdl:part name="parameters" element="tns:Logout" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_Logout_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LogoutResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_sendEnvelope_InputMessage">
+    <wsdl:part name="parameters" element="tns:sendEnvelope" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_sendEnvelope_OutputMessage">
+    <wsdl:part name="parameters" element="tns:sendEnvelopeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_sendInvoice_InputMessage">
+    <wsdl:part name="parameters" element="tns:sendInvoice" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_sendInvoice_OutputMessage">
+    <wsdl:part name="parameters" element="tns:sendInvoiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_sendApplicationResponse_InputMessage">
+    <wsdl:part name="parameters" element="tns:sendApplicationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_sendApplicationResponse_OutputMessage">
+    <wsdl:part name="parameters" element="tns:sendApplicationResponseResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_sendEnvelopeEx_InputMessage">
+    <wsdl:part name="parameters" element="tns:sendEnvelopeEx" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_sendEnvelopeEx_OutputMessage">
+    <wsdl:part name="parameters" element="tns:sendEnvelopeExResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_sendInvoiceEx_InputMessage">
+    <wsdl:part name="parameters" element="tns:sendInvoiceEx" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_sendInvoiceEx_OutputMessage">
+    <wsdl:part name="parameters" element="tns:sendInvoiceExResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_sendSignedInvoice_InputMessage">
+    <wsdl:part name="parameters" element="tns:sendSignedInvoice" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_sendSignedInvoice_OutputMessage">
+    <wsdl:part name="parameters" element="tns:sendSignedInvoiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_sendApplicationResponseEx_InputMessage">
+    <wsdl:part name="parameters" element="tns:sendApplicationResponseEx" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_sendApplicationResponseEx_OutputMessage">
+    <wsdl:part name="parameters" element="tns:sendApplicationResponseExResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_sendEArchiveDocument_InputMessage">
+    <wsdl:part name="parameters" element="tns:sendEArchiveDocument" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_sendEArchiveDocument_OutputMessage">
+    <wsdl:part name="parameters" element="tns:sendEArchiveDocumentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_receiveDocument_InputMessage">
+    <wsdl:part name="parameters" element="tns:receiveDocument" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_receiveDocument_OutputMessage">
+    <wsdl:part name="parameters" element="tns:receiveDocumentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_receiveDone_InputMessage">
+    <wsdl:part name="parameters" element="tns:receiveDone" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_receiveDone_OutputMessage">
+    <wsdl:part name="parameters" element="tns:receiveDoneResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_receiveInvoice_InputMessage">
+    <wsdl:part name="parameters" element="tns:receiveInvoice" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_receiveInvoice_OutputMessage">
+    <wsdl:part name="parameters" element="tns:receiveInvoiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_receiveInvoiceDone_InputMessage">
+    <wsdl:part name="parameters" element="tns:receiveInvoiceDone" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_receiveInvoiceDone_OutputMessage">
+    <wsdl:part name="parameters" element="tns:receiveInvoiceDoneResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_receiveApplicationResponse_InputMessage">
+    <wsdl:part name="parameters" element="tns:receiveApplicationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_receiveApplicationResponse_OutputMessage">
+    <wsdl:part name="parameters" element="tns:receiveApplicationResponseResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_receiveApplicationResponseDone_InputMessage">
+    <wsdl:part name="parameters" element="tns:receiveApplicationResponseDone" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_receiveApplicationResponseDone_OutputMessage">
+    <wsdl:part name="parameters" element="tns:receiveApplicationResponseDoneResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_getApplicationResponse_InputMessage">
+    <wsdl:part name="parameters" element="tns:getApplicationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_getApplicationResponse_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getApplicationResponseResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_getInvoiceStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:getInvoiceStatus" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_getInvoiceStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getInvoiceStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_getAppRespStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:getAppRespStatus" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_getAppRespStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getAppRespStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_getEnvelopeList_InputMessage">
+    <wsdl:part name="parameters" element="tns:getEnvelopeList" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_getEnvelopeList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getEnvelopeListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_getEnvelope_InputMessage">
+    <wsdl:part name="parameters" element="tns:getEnvelope" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_getEnvelope_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getEnvelopeResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_getInvoiceList_InputMessage">
+    <wsdl:part name="parameters" element="tns:getInvoiceList" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_getInvoiceList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getInvoiceListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_getInvoice_InputMessage">
+    <wsdl:part name="parameters" element="tns:getInvoice" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_getInvoice_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getInvoiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_getUserList_InputMessage">
+    <wsdl:part name="parameters" element="tns:getUserList" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_getUserList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getUserListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_getUserListNew_InputMessage">
+    <wsdl:part name="parameters" element="tns:getUserListNew" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_getUserListNew_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getUserListNewResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_getApprovalFlowList_InputMessage">
+    <wsdl:part name="parameters" element="tns:getApprovalFlowList" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_getApprovalFlowList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getApprovalFlowListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_setApprovalFlowId_InputMessage">
+    <wsdl:part name="parameters" element="tns:setApprovalFlowId" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_setApprovalFlowId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:setApprovalFlowIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_getApprovalFlowRes_InputMessage">
+    <wsdl:part name="parameters" element="tns:getApprovalFlowRes" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_getApprovalFlowRes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getApprovalFlowResResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_getDocumentStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:getDocumentStatus" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_getDocumentStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getDocumentStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_getDocumentStatusEx_InputMessage">
+    <wsdl:part name="parameters" element="tns:getDocumentStatusEx" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_getDocumentStatusEx_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getDocumentStatusExResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_getEArchiveXslt_InputMessage">
+    <wsdl:part name="parameters" element="tns:getEArchiveXslt" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_getEArchiveXslt_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getEArchiveXsltResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_getInvoiceApplicationResponse_InputMessage">
+    <wsdl:part name="parameters" element="tns:getInvoiceApplicationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_getInvoiceApplicationResponse_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getInvoiceApplicationResponseResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_getInvoiceResponseData_InputMessage">
+    <wsdl:part name="parameters" element="tns:getInvoiceResponseData" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_getInvoiceResponseData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getInvoiceResponseDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_setApplicationResponseOption_InputMessage">
+    <wsdl:part name="parameters" element="tns:setApplicationResponseOption" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_setApplicationResponseOption_OutputMessage">
+    <wsdl:part name="parameters" element="tns:setApplicationResponseOptionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_getEArchiveInvoicePdfData_InputMessage">
+    <wsdl:part name="parameters" element="tns:getEArchiveInvoicePdfData" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_getEArchiveInvoicePdfData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getEArchiveInvoicePdfDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_getDocumentData_InputMessage">
+    <wsdl:part name="parameters" element="tns:getDocumentData" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_getDocumentData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getDocumentDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_getReconciliationList_InputMessage">
+    <wsdl:part name="parameters" element="tns:getReconciliationList" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_getReconciliationList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getReconciliationListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_sendReconciliationReport_InputMessage">
+    <wsdl:part name="parameters" element="tns:sendReconciliationReport" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_sendReconciliationReport_OutputMessage">
+    <wsdl:part name="parameters" element="tns:sendReconciliationReportResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_createElementId_InputMessage">
+    <wsdl:part name="parameters" element="tns:createElementId" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_createElementId_OutputMessage">
+    <wsdl:part name="parameters" element="tns:createElementIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_cancelEArchiveInvoice_InputMessage">
+    <wsdl:part name="parameters" element="tns:cancelEArchiveInvoice" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_cancelEArchiveInvoice_OutputMessage">
+    <wsdl:part name="parameters" element="tns:cancelEArchiveInvoiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_SendEArchiveListForReconcilition_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendEArchiveListForReconcilition" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_SendEArchiveListForReconcilition_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendEArchiveListForReconcilitionResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_SendDocument_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendDocument" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_SendDocument_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendDocumentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_GetDocument_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDocument" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_GetDocument_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDocumentResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_GetDocumentDone_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDocumentDone" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_GetDocumentDone_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDocumentDoneResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_GetDocumentStatus_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDocumentStatus" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_GetDocumentStatus_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDocumentStatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_GetDocumentData_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDocumentData" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_GetDocumentData_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDocumentDataResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_GetDocumentList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDocumentList" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_GetDocumentList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDocumentListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_GetValidateGIBUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetValidateGIBUser" />
+  </wsdl:message>
+  <wsdl:message name="IPostBoxService_GetValidateGIBUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetValidateGIBUserResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IPostBoxService">
+    <wsdl:operation name="Ping">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/Ping" message="tns:IPostBoxService_Ping_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/PingResponse" message="tns:IPostBoxService_Ping_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ALive">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/ALive" message="tns:IPostBoxService_ALive_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/ALiveResponse" message="tns:IPostBoxService_ALive_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/Login" message="tns:IPostBoxService_Login_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/LoginResponse" message="tns:IPostBoxService_Login_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Logout">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/Logout" message="tns:IPostBoxService_Logout_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/LogoutResponse" message="tns:IPostBoxService_Logout_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="sendEnvelope">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/sendEnvelope" message="tns:IPostBoxService_sendEnvelope_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/sendEnvelopeResponse" message="tns:IPostBoxService_sendEnvelope_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="sendInvoice">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/sendInvoice" message="tns:IPostBoxService_sendInvoice_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/sendInvoiceResponse" message="tns:IPostBoxService_sendInvoice_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="sendApplicationResponse">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/sendApplicationResponse" message="tns:IPostBoxService_sendApplicationResponse_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/sendApplicationResponseResponse" message="tns:IPostBoxService_sendApplicationResponse_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="sendEnvelopeEx">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/sendEnvelopeEx" message="tns:IPostBoxService_sendEnvelopeEx_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/sendEnvelopeExResponse" message="tns:IPostBoxService_sendEnvelopeEx_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="sendInvoiceEx">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/sendInvoiceEx" message="tns:IPostBoxService_sendInvoiceEx_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/sendInvoiceExResponse" message="tns:IPostBoxService_sendInvoiceEx_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="sendSignedInvoice">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/sendSignedInvoice" message="tns:IPostBoxService_sendSignedInvoice_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/sendSignedInvoiceResponse" message="tns:IPostBoxService_sendSignedInvoice_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="sendApplicationResponseEx">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/sendApplicationResponseEx" message="tns:IPostBoxService_sendApplicationResponseEx_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/sendApplicationResponseExResponse" message="tns:IPostBoxService_sendApplicationResponseEx_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="sendEArchiveDocument">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/sendEArchiveDocument" message="tns:IPostBoxService_sendEArchiveDocument_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/sendEArchiveDocumentResponse" message="tns:IPostBoxService_sendEArchiveDocument_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="receiveDocument">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/receiveDocument" message="tns:IPostBoxService_receiveDocument_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/receiveDocumentResponse" message="tns:IPostBoxService_receiveDocument_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="receiveDone">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/receiveDone" message="tns:IPostBoxService_receiveDone_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/receiveDoneResponse" message="tns:IPostBoxService_receiveDone_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="receiveInvoice">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/receiveInvoice" message="tns:IPostBoxService_receiveInvoice_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/receiveInvoiceResponse" message="tns:IPostBoxService_receiveInvoice_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="receiveInvoiceDone">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/receiveInvoiceDone" message="tns:IPostBoxService_receiveInvoiceDone_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/receiveInvoiceDoneResponse" message="tns:IPostBoxService_receiveInvoiceDone_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="receiveApplicationResponse">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/receiveApplicationResponse" message="tns:IPostBoxService_receiveApplicationResponse_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/receiveApplicationResponseResponse" message="tns:IPostBoxService_receiveApplicationResponse_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="receiveApplicationResponseDone">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/receiveApplicationResponseDone" message="tns:IPostBoxService_receiveApplicationResponseDone_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/receiveApplicationResponseDoneResponse" message="tns:IPostBoxService_receiveApplicationResponseDone_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getApplicationResponse">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/getApplicationResponse" message="tns:IPostBoxService_getApplicationResponse_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/getApplicationResponseResponse" message="tns:IPostBoxService_getApplicationResponse_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getInvoiceStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/getInvoiceStatus" message="tns:IPostBoxService_getInvoiceStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/getInvoiceStatusResponse" message="tns:IPostBoxService_getInvoiceStatus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getAppRespStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/getAppRespStatus" message="tns:IPostBoxService_getAppRespStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/getAppRespStatusResponse" message="tns:IPostBoxService_getAppRespStatus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getEnvelopeList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/getEnvelopeList" message="tns:IPostBoxService_getEnvelopeList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/getEnvelopeListResponse" message="tns:IPostBoxService_getEnvelopeList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getEnvelope">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/getEnvelope" message="tns:IPostBoxService_getEnvelope_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/getEnvelopeResponse" message="tns:IPostBoxService_getEnvelope_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getInvoiceList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/getInvoiceList" message="tns:IPostBoxService_getInvoiceList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/getInvoiceListResponse" message="tns:IPostBoxService_getInvoiceList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getInvoice">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/getInvoice" message="tns:IPostBoxService_getInvoice_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/getInvoiceResponse" message="tns:IPostBoxService_getInvoice_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getUserList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/getUserList" message="tns:IPostBoxService_getUserList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/getUserListResponse" message="tns:IPostBoxService_getUserList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getUserListNew">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/getUserListNew" message="tns:IPostBoxService_getUserListNew_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/getUserListNewResponse" message="tns:IPostBoxService_getUserListNew_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getApprovalFlowList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/getApprovalFlowList" message="tns:IPostBoxService_getApprovalFlowList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/getApprovalFlowListResponse" message="tns:IPostBoxService_getApprovalFlowList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="setApprovalFlowId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/setApprovalFlowId" message="tns:IPostBoxService_setApprovalFlowId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/setApprovalFlowIdResponse" message="tns:IPostBoxService_setApprovalFlowId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getApprovalFlowRes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/getApprovalFlowRes" message="tns:IPostBoxService_getApprovalFlowRes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/getApprovalFlowResResponse" message="tns:IPostBoxService_getApprovalFlowRes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getDocumentStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/getDocumentStatus" message="tns:IPostBoxService_getDocumentStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/getDocumentStatusResponse" message="tns:IPostBoxService_getDocumentStatus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getDocumentStatusEx">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/getDocumentStatusEx" message="tns:IPostBoxService_getDocumentStatusEx_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/getDocumentStatusExResponse" message="tns:IPostBoxService_getDocumentStatusEx_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getEArchiveXslt">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/getEArchiveXslt" message="tns:IPostBoxService_getEArchiveXslt_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/getEArchiveXsltResponse" message="tns:IPostBoxService_getEArchiveXslt_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getInvoiceApplicationResponse">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/getInvoiceApplicationResponse" message="tns:IPostBoxService_getInvoiceApplicationResponse_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/getInvoiceApplicationResponseResponse" message="tns:IPostBoxService_getInvoiceApplicationResponse_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getInvoiceResponseData">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/getInvoiceResponseData" message="tns:IPostBoxService_getInvoiceResponseData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/getInvoiceResponseDataResponse" message="tns:IPostBoxService_getInvoiceResponseData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="setApplicationResponseOption">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/setApplicationResponseOption" message="tns:IPostBoxService_setApplicationResponseOption_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/setApplicationResponseOptionResponse" message="tns:IPostBoxService_setApplicationResponseOption_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getEArchiveInvoicePdfData">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/getEArchiveInvoicePdfData" message="tns:IPostBoxService_getEArchiveInvoicePdfData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/getEArchiveInvoicePdfDataResponse" message="tns:IPostBoxService_getEArchiveInvoicePdfData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getDocumentData">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/getDocumentData" message="tns:IPostBoxService_getDocumentData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/getDocumentDataResponse" message="tns:IPostBoxService_getDocumentData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getReconciliationList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/getReconciliationList" message="tns:IPostBoxService_getReconciliationList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/getReconciliationListResponse" message="tns:IPostBoxService_getReconciliationList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="sendReconciliationReport">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/sendReconciliationReport" message="tns:IPostBoxService_sendReconciliationReport_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/sendReconciliationReportResponse" message="tns:IPostBoxService_sendReconciliationReport_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="createElementId">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/createElementId" message="tns:IPostBoxService_createElementId_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/createElementIdResponse" message="tns:IPostBoxService_createElementId_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="cancelEArchiveInvoice">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/cancelEArchiveInvoice" message="tns:IPostBoxService_cancelEArchiveInvoice_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/cancelEArchiveInvoiceResponse" message="tns:IPostBoxService_cancelEArchiveInvoice_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendEArchiveListForReconcilition">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/SendEArchiveListForReconcilition" message="tns:IPostBoxService_SendEArchiveListForReconcilition_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/SendEArchiveListForReconcilitionResponse" message="tns:IPostBoxService_SendEArchiveListForReconcilition_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendDocument">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/SendDocument" message="tns:IPostBoxService_SendDocument_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/SendDocumentResponse" message="tns:IPostBoxService_SendDocument_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDocument">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/GetDocument" message="tns:IPostBoxService_GetDocument_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/GetDocumentResponse" message="tns:IPostBoxService_GetDocument_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentDone">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/GetDocumentDone" message="tns:IPostBoxService_GetDocumentDone_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/GetDocumentDoneResponse" message="tns:IPostBoxService_GetDocumentDone_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentStatus">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/GetDocumentStatus" message="tns:IPostBoxService_GetDocumentStatus_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/GetDocumentStatusResponse" message="tns:IPostBoxService_GetDocumentStatus_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentData">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/GetDocumentData" message="tns:IPostBoxService_GetDocumentData_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/GetDocumentDataResponse" message="tns:IPostBoxService_GetDocumentData_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/GetDocumentList" message="tns:IPostBoxService_GetDocumentList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/GetDocumentListResponse" message="tns:IPostBoxService_GetDocumentList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetValidateGIBUser">
+      <wsdl:input wsaw:Action="http://tempuri.org/IPostBoxService/GetValidateGIBUser" message="tns:IPostBoxService_GetValidateGIBUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IPostBoxService/GetValidateGIBUserResponse" message="tns:IPostBoxService_GetValidateGIBUser_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="PostBoxServiceEndpoint" type="tns:IPostBoxService">
+    <wsp:PolicyReference URI="#PostBoxServiceEndpoint_policy" />
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Ping">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/Ping" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ALive">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/ALive" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/Login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Logout">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/Logout" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendEnvelope">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/sendEnvelope" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendInvoice">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/sendInvoice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendApplicationResponse">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/sendApplicationResponse" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendEnvelopeEx">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/sendEnvelopeEx" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendInvoiceEx">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/sendInvoiceEx" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendSignedInvoice">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/sendSignedInvoice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendApplicationResponseEx">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/sendApplicationResponseEx" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendEArchiveDocument">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/sendEArchiveDocument" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="receiveDocument">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/receiveDocument" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="receiveDone">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/receiveDone" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="receiveInvoice">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/receiveInvoice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="receiveInvoiceDone">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/receiveInvoiceDone" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="receiveApplicationResponse">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/receiveApplicationResponse" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="receiveApplicationResponseDone">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/receiveApplicationResponseDone" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getApplicationResponse">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/getApplicationResponse" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getInvoiceStatus">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/getInvoiceStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAppRespStatus">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/getAppRespStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getEnvelopeList">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/getEnvelopeList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getEnvelope">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/getEnvelope" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getInvoiceList">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/getInvoiceList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getInvoice">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/getInvoice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUserList">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/getUserList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUserListNew">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/getUserListNew" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getApprovalFlowList">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/getApprovalFlowList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setApprovalFlowId">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/setApprovalFlowId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getApprovalFlowRes">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/getApprovalFlowRes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDocumentStatus">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/getDocumentStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDocumentStatusEx">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/getDocumentStatusEx" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getEArchiveXslt">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/getEArchiveXslt" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getInvoiceApplicationResponse">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/getInvoiceApplicationResponse" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getInvoiceResponseData">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/getInvoiceResponseData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setApplicationResponseOption">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/setApplicationResponseOption" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getEArchiveInvoicePdfData">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/getEArchiveInvoicePdfData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDocumentData">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/getDocumentData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getReconciliationList">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/getReconciliationList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendReconciliationReport">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/sendReconciliationReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createElementId">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/createElementId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cancelEArchiveInvoice">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/cancelEArchiveInvoice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendEArchiveListForReconcilition">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/SendEArchiveListForReconcilition" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendDocument">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/SendDocument" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocument">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/GetDocument" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentDone">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/GetDocumentDone" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentStatus">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/GetDocumentStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentData">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/GetDocumentData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentList">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/GetDocumentList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetValidateGIBUser">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/GetValidateGIBUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PostBoxServiceEndpoint_http" type="tns:IPostBoxService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Ping">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/Ping" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ALive">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/ALive" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/Login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Logout">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/Logout" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendEnvelope">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/sendEnvelope" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendInvoice">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/sendInvoice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendApplicationResponse">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/sendApplicationResponse" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendEnvelopeEx">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/sendEnvelopeEx" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendInvoiceEx">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/sendInvoiceEx" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendSignedInvoice">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/sendSignedInvoice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendApplicationResponseEx">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/sendApplicationResponseEx" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendEArchiveDocument">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/sendEArchiveDocument" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="receiveDocument">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/receiveDocument" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="receiveDone">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/receiveDone" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="receiveInvoice">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/receiveInvoice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="receiveInvoiceDone">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/receiveInvoiceDone" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="receiveApplicationResponse">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/receiveApplicationResponse" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="receiveApplicationResponseDone">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/receiveApplicationResponseDone" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getApplicationResponse">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/getApplicationResponse" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getInvoiceStatus">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/getInvoiceStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAppRespStatus">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/getAppRespStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getEnvelopeList">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/getEnvelopeList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getEnvelope">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/getEnvelope" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getInvoiceList">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/getInvoiceList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getInvoice">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/getInvoice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUserList">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/getUserList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getUserListNew">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/getUserListNew" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getApprovalFlowList">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/getApprovalFlowList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setApprovalFlowId">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/setApprovalFlowId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getApprovalFlowRes">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/getApprovalFlowRes" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDocumentStatus">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/getDocumentStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDocumentStatusEx">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/getDocumentStatusEx" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getEArchiveXslt">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/getEArchiveXslt" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getInvoiceApplicationResponse">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/getInvoiceApplicationResponse" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getInvoiceResponseData">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/getInvoiceResponseData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="setApplicationResponseOption">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/setApplicationResponseOption" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getEArchiveInvoicePdfData">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/getEArchiveInvoicePdfData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getDocumentData">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/getDocumentData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getReconciliationList">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/getReconciliationList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="sendReconciliationReport">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/sendReconciliationReport" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="createElementId">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/createElementId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="cancelEArchiveInvoice">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/cancelEArchiveInvoice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendEArchiveListForReconcilition">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/SendEArchiveListForReconcilition" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SendDocument">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/SendDocument" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocument">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/GetDocument" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentDone">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/GetDocumentDone" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentStatus">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/GetDocumentStatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentData">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/GetDocumentData" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDocumentList">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/GetDocumentList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetValidateGIBUser">
+      <soap:operation soapAction="http://tempuri.org/IPostBoxService/GetValidateGIBUser" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PostBoxService">
+    <wsdl:port name="PostBoxServiceEndpoint" binding="tns:PostBoxServiceEndpoint">
+      <soap:address location="https://betatest.diyalogo.com.tr/webservice/PostBoxService.svc" />
+    </wsdl:port>
+    <wsdl:port name="PostBoxServiceEndpoint_http" binding="tns:PostBoxServiceEndpoint_http">
+      <soap:address location="http://betatest.diyalogo.com.tr/webservice/PostBoxService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
